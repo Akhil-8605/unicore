@@ -1,0 +1,498 @@
+/* Base Styles */
+:root {
+  --primary-color: #007bff;
+  --primary-dark: #2563eb;
+  --primary-light: #93c5fd;
+  --primary-bg: #eff6ff;
+  --text-dark: #1f2937;
+  --text-medium: #4b5563;
+  --text-light: #6b7280;
+  --white: #ffffff;
+  --gray-50: #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --border-radius-sm: 0.25rem;
+  --border-radius-md: 0.375rem;
+  --border-radius-lg: 0.5rem;
+  --border-radius-xl: 0.75rem;
+  --transition-normal: all 0.3s ease;
+}
+
+.about-page-about-us {
+  min-height: 100vh;
+  background-color: var(--white);
+}
+
+.container-about-us {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.section-title-about-us {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+}
+
+.section-title-about-us.about-us-centered {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+/* Hero Section */
+.hero-section-about-us {
+  position: relative;
+  height: 100vh;
+}
+
+.hero-overlay-about-us {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.4),
+    rgba(59, 130, 246, 0.4)
+  );
+  z-index: 10;
+  background-size: 200% 100%;
+  animation: gradientShift 5s infinite alternate ease-in-out;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 0;
+  }
+  100% {
+    background-position: 100% 0;
+  }
+}
+
+.hero-image-about-us {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-content-about-us {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: var(--white);
+  padding: 1rem;
+}
+
+.hero-title-about-us {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.hero-subtitle-about-us {
+  font-size: 1.5rem;
+  max-width: 48rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* History Section */
+.history-section-about-us {
+  padding: 5rem 0;
+}
+
+.history-grid-about-us {
+  /* display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem; */
+}
+
+@media (min-width: 768px) {
+  .history-grid-about-us {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.history-content-about-us {
+  display: flex;
+  flex-direction: column;
+}
+
+.history-text-about-us {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  font-size: 1.125rem;
+  color: var(--text-medium);
+}
+
+.achievements-box-about-us {
+  background-color: var(--gray-50);
+  padding: 2rem;
+  border-radius: var(--border-radius-xl);
+  box-shadow: var(--shadow-lg);
+  transition: var(--transition-normal);
+  height: auto;
+}
+
+.achievements-box-about-us:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.1);
+}
+
+.achievements-title-about-us {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+}
+
+.achievements-list-about-us {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.achievement-item-about-us {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.achievement-icon-about-us {
+  background-color: rgba(59, 130, 246, 0.1);
+  padding: 0.75rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-color);
+}
+
+.achievement-content-about-us h4 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.achievement-content-about-us p {
+  color: var(--text-light);
+}
+
+/* Vision & Mission Section */
+.vision-mission-section-about-us {
+  padding: 5rem 0;
+  background-color: var(--gray-50);
+}
+
+.vision-mission-grid-about-us {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .vision-mission-grid-about-us {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.vision-box-about-us,
+.mission-box-about-us {
+  background-color: var(--white);
+  padding: 2rem;
+  border-radius: var(--border-radius-xl);
+  box-shadow: var(--shadow-md);
+  transition: var(--transition-normal);
+}
+
+.vision-box-about-us:hover,
+.mission-box-about-us:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.vm-header-about-us {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.vm-icon-about-us {
+  background-color: rgba(59, 130, 246, 0.1);
+  padding: 0.75rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-color);
+}
+
+.vm-header-about-us h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.vision-box-about-us p,
+.mission-box-about-us p {
+  color: var(--text-medium);
+  font-size: 1.125rem;
+}
+
+/* Leadership Section */
+.leadership-section-about-us {
+  padding: 5rem 0;
+}
+
+.leadership-grid-about-us {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .leadership-grid-about-us {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .leadership-grid-about-us {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.leader-card-about-us {
+  background-color: var(--white);
+  border-radius: var(--border-radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  transition: var(--transition-normal);
+}
+
+.leader-card-about-us:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.leader-image-container-about-us {
+  width: 100%;
+  height: 320px;
+  overflow: hidden;
+}
+
+.leader-image-about-us {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.5s ease;
+}
+
+.leader-card-about-us:hover .leader-image-about-us {
+  transform: scale(1.05);
+}
+
+.leader-info-about-us {
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.leader-info-about-us h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.leader-title-about-us {
+  font-size: 1.25rem;
+  color: var(--text-light);
+  margin-bottom: 1rem;
+}
+
+.leader-bio-about-us {
+  color: var(--text-medium);
+  margin-bottom: 1rem;
+}
+
+.profile-button-about-us {
+  display: inline-flex;
+  align-items: center;
+  color: var(--primary-color);
+  font-weight: 600;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem 0;
+  transition: var(--transition-normal);
+}
+
+.profile-button-about-us:hover {
+  color: var(--primary-dark);
+}
+
+.chevron-icon-about-us {
+  margin-left: 0.25rem;
+}
+
+/* Features Section */
+.features-section-about-us {
+  padding: 5rem 0;
+  background-color: var(--primary-bg);
+}
+
+.features-grid-about-us {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .features-grid-about-us {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .features-grid-about-us {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.feature-card-about-us {
+  background-color: var(--white);
+  padding: 2rem 1.5rem;
+  border-radius: var(--border-radius-xl);
+  box-shadow: var(--shadow-md);
+  text-align: center;
+  transition: var(--transition-normal);
+}
+
+.feature-card-about-us:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.feature-icon-about-us {
+  background-color: rgba(59, 130, 246, 0.1);
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  color: var(--primary-color);
+}
+
+.feature-card-about-us h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.feature-card-about-us p {
+  color: var(--text-light);
+}
+
+/* CTA Section */
+.cta-section-about-us {
+  padding: 5rem 0;
+  text-align: center;
+}
+
+.cta-text-about-us {
+  font-size: 1.25rem;
+  color: var(--text-medium);
+  max-width: 48rem;
+  margin: 0 auto 2rem;
+}
+
+.cta-buttons-about-us {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (min-width: 640px) {
+  .cta-buttons-about-us {
+    flex-direction: row;
+  }
+}
+
+.primary-button-about-us {
+  background-color: var(--primary-color);
+  color: var(--white);
+  font-weight: 700;
+  padding: 0.75rem 2rem;
+  border-radius: var(--border-radius-lg);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: var(--transition-normal);
+}
+
+.primary-button-about-us:hover {
+  background-color: var(--primary-dark);
+}
+
+.secondary-button-about-us {
+  background-color: var(--white);
+  color: var(--primary-color);
+  font-weight: 700;
+  padding: 0.75rem 2rem;
+  border-radius: var(--border-radius-lg);
+  border: 2px solid var(--primary-color);
+  cursor: pointer;
+  text-decoration: none;
+  transition: var(--transition-normal);
+}
+
+.secondary-button-about-us:hover {
+  background-color: var(--primary-bg);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .hero-title-about-us {
+    font-size: 2.5rem;
+  }
+
+  .hero-subtitle-about-us {
+    font-size: 1.25rem;
+  }
+
+  .section-title-about-us {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title-about-us {
+    font-size: 2rem;
+  }
+
+  .hero-section-about-us {
+    height: 400px;
+  }
+
+  .feature-card-about-us,
+  .leader-card-about-us,
+  .vision-box-about-us,
+  .mission-box-about-us {
+    padding: 1.5rem;
+  }
+}

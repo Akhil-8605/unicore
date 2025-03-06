@@ -1,0 +1,308 @@
+/* Base styles and variables */
+.academics-page {
+  color: #2c3e50;
+  font-family: system-ui, -apple-system, sans-serif;
+  line-height: 1.5;
+  background: #ffffff;
+}
+
+/* Layout */
+.academics-page-main-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Floating Navigation */
+.academics-page-floating-nav {
+  position: fixed;
+  top: 2rem;
+  left: 2rem;
+  z-index: 1000;
+}
+
+.academics-page-nav-toggle {
+  background: #007bff;
+  color: #ffffff;
+  border: none;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.academics-page-nav-toggle:hover {
+  transform: scale(1.1);
+}
+
+.academics-page-nav-menu {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+}
+
+.academics-page-nav-menu.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.academics-page-nav-menu a {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.5rem;
+  color: #2c3e50;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+  border-radius: 6px;
+}
+
+.academics-page-nav-menu a:hover {
+  background: rgba(0, 123, 255, 0.1);
+  color: #007bff;
+}
+
+.academics-page-nav-icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* Hero Section */
+.academics-page-hero-section {
+  height: 100vh;
+  background: linear-gradient(135deg, #f6f9fc 0%, #f1f4f9 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.academics-page-hero-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  position: relative;
+}
+
+.academics-page-hero-text {
+  flex: 1;
+  z-index: 1;
+}
+
+.academics-page-hero-text h1 {
+  font-size: 4rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: fadeInUp 1s ease;
+}
+
+.academics-page-hero-text p {
+  font-size: 1.5rem;
+  color: #6c757d;
+  animation: fadeInUp 1s ease 0.2s;
+}
+
+/* Section Styles */
+.academics-page-section {
+  margin: 8rem 0;
+  opacity: 0;
+  animation: sectionFadeIn 0.8s ease forwards;
+}
+
+.academics-page-section h2 {
+  font-size: 2.8rem;
+  font-weight: 800;
+  margin-bottom: 4rem;
+  position: relative;
+  transform: translateX(-20px);
+  opacity: 0;
+  animation: slideInLeft 0.6s ease forwards;
+}
+
+/* Calendar Cards */
+.academics-page-calendar-card,
+.academics-page-document-card {
+  background: #ffffff;
+  padding: 3rem;
+  border: 1.5px solid lightgrey;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  animation: cardFadeIn 0.6s ease forwards;
+}
+
+.academics-page-calendar-card:hover,
+.academics-page-document-card:hover {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+}
+
+.academics-page-calendar-content,
+.academics-page-document-content {
+  max-width: 800px;
+}
+
+.academics-page-calendar-content h3,
+.academics-page-document-content h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+}
+
+.academics-page-calendar-content p,
+.academics-page-document-content p {
+  color: #6c757d;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+/* Buttons */
+.academics-page-download-button,
+.academics-page-view-button {
+  max-width: fit-content;
+  background: #007bff;
+  color: #ffffff;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+}
+
+.academics-page-view-button{
+  background-color: #ffffff;
+  color: #007bff;
+  border: .5px solid #007bff;
+}
+
+.academics-page-download-button:hover,
+.academics-page-view-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
+}
+
+.academics-page-download-button.small {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+}
+
+.academics-page-button-icon {
+  width: 18px;
+  height: 18px;
+}
+
+/* Question Papers Section */
+.academics-page-papers-container {
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+.academics-page-selection-controls {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.academics-page-select-control {
+  padding: 0.75rem 1.5rem;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #2c3e50;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 200px;
+}
+
+.academics-page-select-control:hover {
+  border-color: #007bff;
+}
+
+.academics-page-select-control:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.academics-page-subjects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.academics-page-subject-button {
+  padding: 1rem;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #2c3e50;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.academics-page-subject-button:hover {
+  border-color: #007bff;
+  background: rgba(0, 123, 255, 0.1);
+}
+
+.academics-page-subject-button.active {
+  background: #007bff;
+  color: #ffffff;
+  border-color: #007bff;
+}
+
+.academics-page-papers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.academics-page-paper-card {
+  background: #ffffff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid #e9ecef;
+  transition: all 0.3s ease;
+}
+
+.academics-page-paper-card:hover {
+  border-color: #007bff;
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.academics-page-paper-card h3 {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  color: #2c3e50;
+}
