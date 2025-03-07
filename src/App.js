@@ -33,7 +33,7 @@ import AboutUs from "./Pages/AboutUs.jsx";
 import AdminCalender from "./Admin/AdminCalender.jsx";
 import ComputerPage from "./Pages/courses/ComputerEngg.jsx"
 import MechanicalPage from "./Pages/courses/MechanicalEnggPage.jsx";
-import Sample from "./samplelocation.jsx";
+
 function App() {
   return (
     <AuthProvider>
@@ -62,7 +62,6 @@ function App() {
           <Route path="/mechanical" element={<MechanicalPage/>}/>
 
           <Route path="*" element={<Error />} />
-          <Route path="/sample" element={<Sample/>}/>
 
           <Route element={<PrivateRoute allowedRoles={["admin"]} />}>
             <Route path="/admin" element={<AdminImageGallery />} />
