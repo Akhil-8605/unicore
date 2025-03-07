@@ -34,7 +34,6 @@ export default function StudentPortalLayout({ children }) {
     academic: [
       { name: "Library", href: "/student-portal/library", icon: Library },
       { name: "Exam Portal", href: "/student-portal/exams", icon: BookOpen },
-      { name: "Certificates", href: "/student-portal/certificates", icon: Award },
     ],
     personal: [
       { name: "Profile", href: "/student-portal/profile", icon: User },

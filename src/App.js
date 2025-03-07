@@ -22,6 +22,7 @@ import CertificatesPage from "./Student/Certificates";
 import Assignments from "./Student/Assignments";
 import Schedules from "./Student/Schedule";
 import SamplePage from "./Pages/Sample";
+import CoursePage from "./Pages/courses/CoursePage";
 import Error from "./Authentication/Error";
 import AdminImageGallery from "./Admin/AdminImageGallery";
 import AdminEvents from "./Admin/AdminEvents";
@@ -30,9 +31,9 @@ import AdminLibraryRequest from "./Admin/AdminRequestedBooks";
 import AdminUpcomingExams from "./Admin/AdminUpcomingExams.jsx";
 import AboutUs from "./Pages/AboutUs.jsx";
 import AdminCalender from "./Admin/AdminCalender.jsx";
-import ComputerEnggPage from "./Pages/courses/ComputerEngg.jsx";
-import ElectronicsPage from "./Pages/courses/ElectronicsEnggPage.jsx";
+import ComputerPage from "./Pages/courses/ComputerEngg.jsx"
 import MechanicalPage from "./Pages/courses/MechanicalEnggPage.jsx";
+import Sample from "./samplelocation.jsx";
 function App() {
   return (
     <AuthProvider>
@@ -55,11 +56,13 @@ function App() {
             element={<ClassTestResults />}
           />
           <Route path="/departments" element={<DepartmentsPage />} />
-          <Route path="/computerengineering" element={<ComputerEnggPage/>}/>
-          <Route path="/electronicsengineering" element={<ElectronicsPage/>}/>
-          <Route path="/mechanicalengineering" element={<MechanicalPage/>}/>
+          <Route path="/courses/:courseId" element={<CoursePage />} />
+          <Route path="/computer" element={<ComputerPage/>}/>
+          <Route path="/electronics" element={<ComputerPage/>}/>
+          <Route path="/mechanical" element={<MechanicalPage/>}/>
 
           <Route path="*" element={<Error />} />
+          <Route path="/sample" element={<Sample/>}/>
 
           <Route element={<PrivateRoute allowedRoles={["admin"]} />}>
             <Route path="/admin" element={<AdminImageGallery />} />
