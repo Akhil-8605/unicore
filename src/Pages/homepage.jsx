@@ -13,7 +13,7 @@ import ImageGallery from './homepage/ImageGallery';
 import AboutSection from './homepage/AboutSection';
 import VideoTour from './homepage/VideoTour';
 import CoursesSection from './homepage/CoursesSection';
-
+import EventsSectionImages from "./homepage/EventsSectionImages"
 const Homepage = () => { // Ensure the component starts with an uppercase letter
   const location = useLocation(); // useLocation must be inside the component
 
@@ -35,7 +35,8 @@ const Homepage = () => { // Ensure the component starts with an uppercase letter
       <AboutSection />
       <QuickAccess />
       <UpcomingEventsSection />
-      <CoursesSection/>
+      <EventsSectionImages />
+      <CoursesSection />
       <OurRecruiters />
       <VideoTour />
       <LoginNow />

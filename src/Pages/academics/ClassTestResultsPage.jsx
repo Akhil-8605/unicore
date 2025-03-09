@@ -54,7 +54,11 @@ const departments = [
                         pdfUrl: "/pdfs/computer/sem1/ct2/english.pdf",
                         teacher: "Mr. Jhadhav",
                         teacherFeedback: {
-                            suggestions: []
+                            suggestions: [
+                                "Focus more on technical writing",
+                                "Practice professional communication",
+                                "Work on presentation skills"
+                            ]
                         }
                     },
                     {
