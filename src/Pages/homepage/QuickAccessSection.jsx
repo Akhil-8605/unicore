@@ -226,7 +226,7 @@ const ResourceCards = () => {
           <div className="quick-access-card-content">
             <h3>Previous Year Papers</h3>
             <p>Access question papers and model answers to prepare better</p>
-            <a href="/pyqs" className="quick-access-card-link">
+            <a href="/question-papers" className="quick-access-card-link">
               <span className="quick-access-link-text">Browse PYQs</span>
               <span className="quick-access-arrow-icon">
                 <svg

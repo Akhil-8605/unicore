@@ -2753,12 +2753,16 @@ export default function QuestionPapers() {
       })
   }
 
+  function handlegoback(){
+    window.history.back();
+}
+
   return (
     <div className="question-papers-page">
       {/* Header */}
       <header className="question-papers-page-header">
         <div className="question-papers-header-content">
-          <Link to="/academics" className="question-papers-back-button">
+          <Link to="" onClick={handlegoback} className="question-papers-back-button">
             <ArrowLeft className="question-papers-button-icon" />
           </Link>
           <h1>Question Papers</h1>

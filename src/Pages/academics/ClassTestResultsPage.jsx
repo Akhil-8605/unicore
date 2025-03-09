@@ -199,12 +199,16 @@ export default function ClassTestResults() {
     };
     const [showChart, setShowChart] = useState(false);
 
+    function handlegoback(){
+        window.history.back();
+    }
+
     return (
         <div className="class-test-results-page">
             {/* Header */}
             <header className="results-page-page-header">
                 <div className="results-page-header-content">
-                    <Link to="/academics" className="results-page-back-button">
+                    <Link to="" onClick={handlegoback} className="results-page-back-button">
                         <ArrowLeft className="results-page-button-icon" />
                     </Link>
                     <h1>Class Test Results</h1>

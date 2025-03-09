@@ -14,7 +14,7 @@ const StudentLibrary = () => {
   const { books } = useFirebaseBooks();
   // Get logged-in user data from the auth provider
   const { user } = useAuth();
-  
+
   const [searchTerm, setSearchTerm] = useState('');
   const [showFilters, setShowFilters] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -66,15 +66,17 @@ const StudentLibrary = () => {
     }
   };
 
+  // Updated the filtering logic to use book.category instead of book.categories
   const filteredBooks = books.filter((book) => {
+    const lowerSearchTerm = searchTerm.toLowerCase();
     const matchesSearch =
-      book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      book.categories.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      book.publishedYear.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      book.price.toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
-      book.copies.toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
-      book.available.toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
-      book.author.toLowerCase().includes(searchTerm.toLowerCase());
+      book.title.toLowerCase().includes(lowerSearchTerm) ||
+      book.category.toLowerCase().includes(lowerSearchTerm) ||
+      book.publishedYear.toString().toLowerCase().includes(lowerSearchTerm) ||
+      book.price.toString().toLowerCase().includes(lowerSearchTerm) ||
+      book.copies.toString().toLowerCase().includes(lowerSearchTerm) ||
+      book.available.toString().toLowerCase().includes(lowerSearchTerm) ||
+      book.author.toLowerCase().includes(lowerSearchTerm);
     const matchesCategory = selectedCategory === 'all' || book.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });

@@ -116,7 +116,7 @@ export default function Academics() {
                         <div className="academics-page-document-content">
                             <h3>Previous Year Question Papers</h3>
                             <p>Access a comprehensive collection of previous year question papers for all departments and semesters. Our archive includes regular and backlog examination papers to help students prepare effectively.</p>
-                            <Link to="/academics/question-papers" className="academics-page-view-button">
+                            <Link to="/question-papers" className="academics-page-view-button">
                                 View Question Papers
                             </Link>
                         </div>
@@ -130,7 +130,7 @@ export default function Academics() {
                         <div className="academics-page-document-content">
                             <h3>Internal Assessment Results</h3>
                             <p>View and download your class test results, track your performance, and access detailed score analysis for all subjects. Results are available for both Class Test 1 and Class Test 2.</p>
-                            <Link to="/academics/class-test-results" className="academics-page-view-button">
+                            <Link to="/class-test-results" className="academics-page-view-button">
                                 View Results
                             </Link>
                         </div>

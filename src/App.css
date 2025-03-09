@@ -1,16 +1,46 @@
-:root{
+:root {
   --primary-color: #007bff;
   --secondary-color: #ffffff;
 }
 
-html{
+html {
   scroll-behavior: smooth;
+  overflow-y: auto;
   scrollbar-width: none;
-  scrollbar-color: transperant;
+  transition: all 0.5s ease-in-out;
 }
 
-body{
-  scroll-behavior: smooth;
+::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+  transition: width 0.5s ease-in-out;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+html.show-scrollbar {
+  scrollbar-width: auto;
+  scrollbar-color: var(--primary-color) var(--secondary-color);
+}
+
+html.show-scrollbar::-webkit-scrollbar {
+  width: 20px;
+}
+
+html.show-scrollbar::-webkit-scrollbar-thumb {
+  background: initial;
+  border-radius: initial;
+  border: initial;
+}
+
+html.show-scrollbar::-webkit-scrollbar-track {
+  background: initial;
 }
 
 ::selection {

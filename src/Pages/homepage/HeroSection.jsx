@@ -103,16 +103,16 @@ export default function Hero() {
         </div>
 
         <div ref={parallaxRef} className="hero-section-floating-elements">
-          <a className="hero-section-floating-card hero-section-card1" href='/student-portal/library' style={{textDecoration: "none"}}>
+          <div className="hero-section-floating-card hero-section-card1">
             <svg className="hero-section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
               <path d="M6 12v5c3 3 9 3 12 0v-5" />
             </svg>
             <h3>Smart Learning</h3>
             <p>AI-Powered Education</p>
-          </a>
+          </div>
 
-          <a className="hero-section-floating-card hero-section-card2" href='' style={{textDecoration: "none"}}>
+          <div className="hero-section-floating-card hero-section-card2">
             <svg className="hero-section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
               <circle cx="9" cy="7" r="4" />
@@ -121,9 +121,9 @@ export default function Hero() {
             </svg>
             <h3>Community</h3>
             <p>Connected Campus</p>
-          </a>
+          </div>
 
-          <a className="hero-section-floating-card card3" href='/student-portal/schedule' style={{textDecoration: "none"}}>
+          <div className="hero-section-floating-card card3">
             <svg className="hero-section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
               <line x1="16" y1="2" x2="16" y2="6" />
@@ -132,7 +132,7 @@ export default function Hero() {
             </svg>
             <h3>Schedule</h3>
             <p>Smart Timetabling</p>
-          </a>
+          </div>
         </div>
       </div>
     </div >

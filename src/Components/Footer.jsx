@@ -50,7 +50,7 @@ function Footer() {
                             <ul>
                                 <li><a href="/library" className="footer-section-hover-effect">Library</a></li>
                                 <li><a href="/student-portal" className="footer-section-hover-effect">Student Portal</a></li>
-                                <li><a href="/helpdesk" className="footer-section-hover-effect">Helpdesk</a></li>
+                                <li><a href="/email-services" className="footer-section-hover-effect">Email Service</a></li>
                             </ul>
                         </div>
 

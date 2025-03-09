@@ -5,8 +5,8 @@ import "./CoursePage.css"
 import dummyPerson from "../../Images/PersonDummy.png"
 
 // Note: In a real implementation, you would import these from your actual files
-const coEven = "/documents/co-even-time-table.pdf"
-const coOdd = "/documents/co-odd-time-table.pdf"
+import coEven from '../../Documents/co-even-time-table.pdf';
+import coOdd from '../../Documents/co-odd-time-table.pdf';
 
 const computerCourseData = {
   title: "Computer Engineering",

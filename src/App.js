@@ -22,8 +22,6 @@ import ExamPortalPage from "./Student/Exams";
 import CertificatesPage from "./Student/Certificates";
 import Assignments from "./Student/Assignments";
 import Schedules from "./Student/Schedule";
-import SamplePage from "./Pages/Sample";
-import CoursePage from "./Pages/courses/CoursePage";
 import Error from "./Authentication/Error";
 import AdminImageGallery from "./Admin/AdminImageGallery";
 import AdminEvents from "./Admin/AdminEvents";
@@ -40,6 +38,25 @@ import EmailServicesPage from "./Pages/EmailServicesPage.jsx";
 import loader from "./Images/loading.gif";
 
 function App() {
+
+  useEffect(() => {
+    const threshold = 15;
+
+    const handleMouseMove = (event) => {
+      if (window.innerWidth - event.clientX <= threshold) {
+        document.documentElement.classList.add("show-scrollbar");
+      } else {
+        document.documentElement.classList.remove("show-scrollbar");
+      }
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
+
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -75,10 +92,9 @@ function App() {
           <Route path="/academic-calendar" element={<AcademicCalendar />} />
           <Route path="/admissions" element={<Admissions />} />
           <Route path="/academics" element={<Academics />} />
-          <Route path="/academics/question-papers" element={<QuestionPapers />} />
-          <Route path="/academics/class-test-results" element={<ClassTestResults />} />
+          <Route path="/question-papers" element={<QuestionPapers />} />
+          <Route path="/class-test-results" element={<ClassTestResults />} />
           <Route path="/departments" element={<DepartmentsPage />} />
-          <Route path="/courses/:courseId" element={<CoursePage />} />
           <Route path="/computer" element={<ComputerPage />} />
           <Route path="/electronics" element={<ElectronicsPage />} />
           <Route path="/mechanical" element={<MechanicalPage />} />
@@ -88,25 +104,45 @@ function App() {
           <Route element={<PrivateRoute allowedRoles={["admin"]} />}>
             <Route path="/admin" element={<AdminImageGallery />} />
             <Route path="/admin/library" element={<AdminLibrary />} />
-            <Route path="/admin/books-request" element={<AdminLibraryRequest />} />
+            <Route
+              path="/admin/books-request"
+              element={<AdminLibraryRequest />}
+            />
             <Route path="/admin/events" element={<AdminEvents />} />
             <Route path="/admin/students" element={<AdminStudentsList />} />
             <Route path="/admin/exams" element={<AdminUpcomingExams />} />
-            <Route path="/admin/academic-calender" element={<AdminCalender />} />
+            <Route
+              path="/admin/academic-calender"
+              element={<AdminCalender />}
+            />
           </Route>
 
           <Route element={<PrivateRoute allowedRoles={["student"]} />}>
             <Route path="/student-portal" element={<Dashboard />} />
             <Route path="/student-portal/schedule" element={<Schedules />} />
-            <Route path="/student-portal/library" element={<StudentLibraryPage />} />
+            <Route
+              path="/student-portal/library"
+              element={<StudentLibraryPage />}
+            />
             <Route path="/student-portal/profile" element={<ProfilePage />} />
-            <Route path="/student-portal/attendance" element={<AttendancePage />} />
+            <Route
+              path="/student-portal/attendance"
+              element={<AttendancePage />}
+            />
             <Route path="/student-portal/exams" element={<ExamPortalPage />} />
-            <Route path="/student-portal/certificates" element={<CertificatesPage />} />
-            <Route path="/student-portal/assignments" element={<Assignments />} />
+            <Route
+              path="/student-portal/certificates"
+              element={<CertificatesPage />}
+            />
+            <Route
+              path="/student-portal/assignments"
+              element={<Assignments />}
+            />
           </Route>
 
-          <Route element={<PrivateRoute allowedRoles={["student", "admin"]} />} />
+          <Route
+            element={<PrivateRoute allowedRoles={["student", "admin"]} />}
+          />
         </Routes>
       </Router>
     </AuthProvider>

@@ -3,21 +3,15 @@ import { Search, SlidersHorizontal, BookOpen, X, Check, ShoppingCart } from 'luc
 import './LibraryPage.css';
 import MainHeader from '../Components/MainHeader.jsx';
 import { useFirebaseBooks } from '../Admin/useFirebaseBooks.js';
-// Import Firestore functions and your configured db
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '../Authentication/firebase';
-// Import the auth hook to get logged-in user data
 import { useAuth } from '../Authentication/AuthProvider';
 import { useNavigate } from 'react-router-dom';
 import Footer from '../Components/Footer.jsx';
 
 const StudentLibrary = () => {
-
     const navigate = useNavigate();
-
-    // Get books from Firestore via your custom hook
     const { books } = useFirebaseBooks();
-    // Get logged-in user data from the auth provider
     const { user } = useAuth();
 
     const [searchTerm, setSearchTerm] = useState('');
@@ -27,14 +21,10 @@ const StudentLibrary = () => {
     const [showRequestModal, setShowRequestModal] = useState(false);
     const [selectedBook, setSelectedBook] = useState(null);
 
-    // Optionally handle the case where the user is not yet loaded
-    // if (!user) {
-    //     return <div>Loading user data...</div>;
-    // }
-
     // Derive unique categories from the fetched books
     const categories = Array.from(new Set(books.map((book) => book.category)));
 
+    // Opens the modal to confirm purchase request for a given book
     const handlePurchaseRequest = (book) => {
         setSelectedBook(book);
         setShowRequestModal(true);
@@ -42,7 +32,6 @@ const StudentLibrary = () => {
 
     const submitRequest = async () => {
         if (selectedBook) {
-            // Build a new request object using the selected book details and logged-in user data
             const newRequest = {
                 bookId: selectedBook.id,
                 title: selectedBook.title,
@@ -57,11 +46,9 @@ const StudentLibrary = () => {
             };
 
             try {
-                // Add the request to the "booksRequest" collection (Firestore creates it automatically if needed)
+                // Add the request to the "booksRequest" collection
                 const docRef = await addDoc(collection(db, 'booksRequest'), newRequest);
                 console.log('Request submitted with ID:', docRef.id);
-
-                // Optionally update local state with the new request
                 setRequests([...requests, newRequest]);
                 setShowRequestModal(false);
                 setSelectedBook(null);
@@ -71,11 +58,12 @@ const StudentLibrary = () => {
         }
     };
 
+    // Updated filtering: use book.category (not book.categories) and convert publishedYear to string
     const filteredBooks = books.filter((book) => {
         const matchesSearch =
             book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            book.categories.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            book.publishedYear.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            book.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            book.publishedYear.toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
             book.price.toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
             book.copies.toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
             book.available.toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -170,8 +158,12 @@ const StudentLibrary = () => {
                                 </div>
                                 <div className="library-page-book-actions student">
                                     <button
-                                        onClick={() => navigate(`/student-portal/library`)}
-                                        className={`library-page-btn-request `}
+                                        onClick={() => {
+                                            if (!hasExistingRequest(book.id)) {
+                                                handlePurchaseRequest(book);
+                                            }
+                                        }}
+                                        className="library-page-btn-request"
                                     >
                                         <ShoppingCart size={16} />
                                         {hasExistingRequest(book.id) ? 'Requested' : 'Request Purchase'}
@@ -218,7 +210,7 @@ const StudentLibrary = () => {
                     )}
                 </div>
             </div>
-            <Footer/>
+            <Footer />
         </div>
     );
 };
