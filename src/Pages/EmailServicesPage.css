@@ -1,0 +1,597 @@
+.email-services-background-shapes {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.email-services-shape {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.05;
+}
+
+.email-services-shape-1 {
+  top: -150px;
+  right: -100px;
+  width: 500px;
+  height: 500px;
+  background: #007bff;
+}
+
+.email-services-shape-2 {
+  bottom: -200px;
+  left: -150px;
+  width: 600px;
+  height: 600px;
+  background: #4da3ff;
+}
+
+.email-services-shape-3 {
+  top: 40%;
+  right: 20%;
+  width: 300px;
+  height: 300px;
+  background: #00d2ff;
+}
+
+/* Portal container */
+.email-services-portal-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative;
+}
+
+/* Header styles */
+.email-services-portal-header {
+  padding: 2rem 0;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.email-services-logo-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.email-services-logo {
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.12);
+}
+
+.email-services-logo-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.email-services-logo-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.email-services-portal-header h1 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #007bff;
+  letter-spacing: -0.5px;
+}
+
+.email-services-header-subtitle {
+  color: #5a6b8c;
+  margin: 0;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+}
+
+/* Welcome section */
+.email-services-welcome-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4rem;
+  gap: 2rem;
+}
+
+.email-services-welcome-content {
+  flex: 1;
+}
+
+.email-services-welcome-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.email-services-welcome-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+.email-services-welcome-section h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+  color: #1a2b4e;
+  letter-spacing: -0.5px;
+}
+
+.email-services-highlight {
+  color: #007bff;
+  position: relative;
+  display: inline-block;
+}
+
+.email-services-highlight::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background-color: rgba(0, 123, 255, 0.1);
+  z-index: -1;
+  border-radius: 4px;
+}
+
+.email-services-welcome-text {
+  font-size: 1.1rem;
+  color: #5a6b8c;
+  margin-bottom: 2rem;
+  max-width: 600px;
+}
+
+.email-services-welcome-badges {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.email-services-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: rgba(0, 123, 255, 0.08);
+  color: #007bff;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.email-services-badge-icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* Features section */
+.email-services-features-section {
+  margin-bottom: 4rem;
+}
+
+.email-services-features-section h3 {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1a2b4e;
+  position: relative;
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.email-services-features-section h3::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 4px;
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  border-radius: 2px;
+}
+
+.email-services-features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.email-services-feature-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.12);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border: 1px solid rgba(0, 123, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.email-services-feature-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(135deg, #007bff, #0056b3);
+}
+
+.email-services-feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0, 123, 255, 0.16);
+}
+
+.email-services-feature-icon-wrapper {
+  background-color: rgba(0, 123, 255, 0.1);
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.email-services-feature-icon {
+  color: #007bff;
+  width: 24px;
+  height: 24px;
+}
+
+.email-services-feature-card h4 {
+  margin: 0 0 1rem 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #1a2b4e;
+}
+
+.email-services-feature-card p {
+  color: #5a6b8c;
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* Stats section */
+.email-services-stats-section {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 4rem;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.email-services-stat-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 200px;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border: 1px solid rgba(0, 123, 255, 0.1);
+}
+
+.email-services-stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0, 123, 255, 0.16);
+}
+
+.email-services-stat-icon-wrapper {
+  margin-bottom: 1rem;
+}
+
+.email-services-stat-icon {
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.08);
+}
+
+.email-services-stat-number {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #007bff;
+  margin-bottom: 0.5rem;
+}
+
+.email-services-stat-label {
+  color: #5a6b8c;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* Email access section */
+.email-services-email-access-section {
+  margin-bottom: 4rem;
+}
+
+.email-services-email-card {
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 12px 32px rgba(0, 123, 255, 0.2);
+  position: relative;
+}
+
+.email-services-email-card-content {
+  padding: 3rem;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.email-services-email-card-text {
+  flex: 2;
+}
+
+.email-services-email-action {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.email-services-email-card h3 {
+  margin-top: 0;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.email-services-email-features-list {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0 0;
+}
+
+.email-services-email-features-list li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.email-services-check-icon {
+  color: white;
+  width: 16px;
+  height: 16px;
+}
+
+.email-services-email-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  color: #007bff;
+  border: none;
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.12);
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 300px;
+}
+
+.email-services-button-shadow {
+  position: absolute;
+  width: 90%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  top: 8px;
+  z-index: 1;
+}
+
+.email-services-email-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 123, 255, 0.16);
+}
+
+.email-services-email-button:active {
+  transform: translateY(-1px);
+}
+
+.email-services-button-icon {
+  margin-right: 8px;
+  width: 18px;
+  height: 18px;
+}
+
+.email-services-external-icon {
+  margin-left: 8px;
+  width: 16px;
+  height: 16px;
+}
+
+.email-services-email-card-decoration {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.email-services-decoration-circle {
+  position: absolute;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.email-services-decoration-circle:nth-child(1) {
+  width: 200px;
+  height: 200px;
+  top: -100px;
+  right: -50px;
+}
+
+.email-services-decoration-circle:nth-child(2) {
+  width: 150px;
+  height: 150px;
+  bottom: -50px;
+  left: 10%;
+}
+
+.email-services-decoration-circle:nth-child(3) {
+  width: 100px;
+  height: 100px;
+  top: 20%;
+  right: 20%;
+}
+
+/* Footer styles */
+.email-services-portal-footer {
+  padding: 3rem 0;
+  border-top: 1px solid #e6edf5;
+}
+
+.email-services-footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.email-services-footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #007bff;
+  font-weight: 600;
+}
+
+.email-services-logo.small {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+}
+
+.email-services-logo-icon.small {
+  width: 16px;
+  height: 16px;
+}
+
+.email-services-footer-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.email-services-footer-links a {
+  color: #5a6b8c;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  font-size: 0.9rem;
+}
+
+.email-services-footer-links a:hover {
+  color: #007bff;
+}
+
+.email-services-copyright {
+  color: #8896b8;
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .email-services-welcome-section {
+    flex-direction: column-reverse;
+  }
+
+  .email-services-welcome-image {
+    order: -1;
+  }
+
+  .email-services-email-card-content {
+    flex-direction: column;
+    padding: 2rem;
+  }
+
+  .email-services-email-action {
+    width: 100%;
+  }
+
+  .email-services-email-button {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .email-services-features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .email-services-stats-section {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .email-services-stat-card {
+    width: 100%;
+  }
+
+  .email-services-welcome-section h2 {
+    font-size: 2rem;
+  }
+
+  .email-services-footer-links {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .email-services-portal-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .email-services-welcome-badges {
+    justify-content: center;
+  }
+
+  .email-services-email-card-content {
+    padding: 1.5rem;
+  }
+}

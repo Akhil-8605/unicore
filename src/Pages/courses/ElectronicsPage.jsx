@@ -5,73 +5,71 @@ import "./CoursePage.css"
 import dummyPerson from "../../Images/PersonDummy.png"
 
 // Note: In a real implementation, you would import these from your actual files
-import meEven from '../../Documents/me-even-time-table.pdf';
+import ejEven from '../../Documents/ej-even-time-table.pdf';
+import ejOdd from '../../Documents/ej-odd-time-table.pdf';
 
-const mechanicalCourseData = {
-    title: 'Mechanical Engineering',
+const electronicsCourseData = {
+    title: 'Electronics And Telecommunication Engineering',
     description:
-        "Mechanical Engineering deals with the design and production of machines, tools, and plays an important role in the automobile, railway, and aerospace sectors. The department has a team of highly qualified and experienced faculty dedicated to creating smart technocrats ready to meet global challenges. It is equipped with advanced laboratories featuring modern machinery like VMC and CNC machining centers.",
+        "The department of Electronics & Telecommunication Engineering strives for excellence in education so that students can establish themselves as world-class technicians and practicing engineers. The department boasts good infrastructure and fully developed labs that empower students with the proficiency and knowledge required to excel in the dynamic field of electronics and technology, while also preparing them for higher education and industry challenges.",
     image:
-        'https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?auto=format&fit=crop&q=80&w=1200',
+        'https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?auto=format&fit=crop&q=80&w=1200',
     vision:
-        'To prepare competent mechanical engineers by enhancing technical knowledge and skills to cater to industry & society needs',
+        'To prepare proficient engineers with technological advancement in Electronics and Telecommunication Engineering to meet industry and social needs',
     mission: [
-        `Mission 1: To offer quality technical education through an effective teaching-learning process and industry interaction.`,
-        `Mission 2: To inculcate ethical values and professional skills in students by providing training and workshops.`,
-        `Mission 3: To furnish opportunities for lifelong learning through co-curricular and extra-curricular activities.`,
-        `
-            Program Educational Objectives (PEOs)<br/><br/>
+        `Mission 1: To offer modern educational aids, laboratories along with industry interaction.`,
+        `Mission 2: To enable students to strengthen their soft skills through co-curricular and extra-curricular activities.`,
+        `Mission 3: To encourage lifelong learning for better career opportunities.`,
+        `Program Educational Objectives (PEOs)<br/><br/>
     
-        PEO1: Provide socially responsible, environment friendly solutions to Mechanical Engineering related broad-based problems adapting professional ethics.<br/>
+    PEO1: Provide socially responsible, environment friendly solutions to Electronics and Telecommunication Engineering related broad-based problems adapting professional ethics.<br/>
     
-        PEO2: Adapt state-of-the-art Mechanical Engineering technologies to work in multi-disciplinary work environments.<br/>
+    PEO2: Adapt state-of-the-art Electronics and Telecommunication Engineering broad-based technologies to work in multi-disciplinary work environments.<br/>
     
-        PEO3: Solve broad-based problems individually and as a team member communicating effectively in the world of work.<br/><br/>
+    PEO3: Solve broad-based problems individually and as a team member communicating effectively in the world of work.<br/><br/>
     
-        Programme Outcomes (POs)<br/><br/>
+    Programme Outcomes (POs)<br/><br/>
     
-        PO1: Basic and Discipline specific knowledge: Apply knowledge of basic mathematics, science and engineering fundamentals and engineering specialization to solve problems.<br/>
+    PO1: Basic and Discipline specific knowledge: Apply knowledge of basic mathematics, science and engineering fundamentals and engineering specialization to solve the engineering problems.<br/>
     
-        PO2: Problem analysis: Identify and analyse well-defined engineering problems using codified standard methods.<br/>
+    PO2: Problem analysis: Identify and analyse well-defined engineering problems using codified standard methods.<br/>
     
-        PO3: Design/ development of solutions: Design solutions for well-defined technical problems and assist with the design of systems or processes to meet specified needs.<br/>
+    PO3: Design/ development of solutions: Design solutions for well-defined technical problems and assist with the design of system components or processes to meet specified needs.<br/>
     
-        PO4: Engineering Tools, Experimentation and Testing: Apply modern engineering tools and techniques to conduct standard tests and measurements.<br/>
+    PO4: Engineering Tools, Experimentation and Testing: Apply modern engineering tools and appropriate techniques to conduct standard tests and measurements.<br/>
     
-        PO5: Engineering practices for society, sustainability and environment: Apply appropriate technology in the context of society, sustainability, and ethical practices.<br/>
+    PO5: Engineering practices for society, sustainability and environment: Apply appropriate technology in the context of society, sustainability, environment and ethical practices.<br/>
     
-        PO6: Project Management: Use engineering management principles individually or as a team to manage projects and effectively communicate about engineering activities.<br/>
+    PO6: Project Management: Use engineering management principles individually, as a team member or a leader to manage projects and effectively communicate about well-defined engineering activities.<br/>
     
-        PO7: Life-long learning: Engage in continuous updating of knowledge and skills in response to technological changes.<br/><br/>
+    PO7: Life-long learning: Ability to analyse individual needs and engage in updating in the context of technological changes.<br/><br/>
     
-        Program Specific Outcomes (PSOs)<br/><br/>
+    Program Specific Outcomes (PSOs)<br/><br/>
     
-        PSO1: Modern Software Usage: Use state-of-the-art software for design, drafting, manufacturing, and documentation of mechanical components.<br/>
+    PSO1: Electronics and Telecommunication System: Maintain various types of Electronics & Telecommunication Systems.<br/>
     
-        PSO2: Machine Maintenance: Maintain and select appropriate machines, equipment, and instruments in the field of Mechanical Engineering.<br/>
-    
-        PSO3: Process Management: Manage mechanical processes through effective selection, scheduling, and operational techniques.`,
+    PSO2: EDA Tools Usage: Use EDA tools to develop simple Electronics and Telecommunication Engineering related circuits.`,
     ],
     faculty: [
-        { name: 'Mr. Bagale M G (HOD)', position: 'B.E (Mech), Lecturer Exp. 25 Yrs' },
-        { name: 'Mr. Tirthkar R N', position: 'B.E (Mech), Lecturer Exp. 22 Yrs' },
-        { name: 'Mr. Shinde D V', position: 'M.E Design, Lecturer Exp. 21 Yrs' },
-        { name: 'Mr. Thalange S S', position: 'M.E Design, Lecturer Exp. 19 Yrs' },
+        { name: 'Mr. Choudhari A V (HOD)', position: 'M.Tech ES, Lecturer Exp. 17 Yrs.' },
+        { name: 'Mr. Nimbalkar G C', position: 'M.E (EE) Lecturer Exp. 25 Yrs.' },
+        { name: 'Mr. Patki A D', position: 'B.E, M.E (E&TC), Lecturer Exp. 21 Yrs' },
+        { name: 'Mrs. Konade S B', position: 'B.E (CSE) Lecturer Exp. 4 Yrs' },
     ],
     labs: [
         {
-            name: 'CAD/CAM Lab',
+            name: 'Electronics Lab',
             image:
-                'https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?auto=format&fit=crop&q=80&w=400',
+                'https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?auto=format&fit=crop&q=80&w=400',
         },
         {
-            name: 'Manufacturing Lab',
+            name: 'Communication Lab',
             image:
-                'https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?auto=format&fit=crop&q=80&w=400',
+                'https://images.unsplash.com/photo-1516110833967-0b5716ca1387?auto=format&fit=crop&q=80&w=400',
         },
     ],
-    timetablePdfEven: meEven,
-    timetablePdfOdd: meEven,
+    timetablePdfEven: ejEven,
+    timetablePdfOdd: ejOdd,
 };
 
 export default function ElectronicsPage() {
@@ -83,13 +81,13 @@ export default function ElectronicsPage() {
       <div className="courses-page-hero-section">
         <div className="courses-page-hero-overlay"></div>
         <img
-          src={mechanicalCourseData.image || "/placeholder.svg"}
+          src={electronicsCourseData.image || "/placeholder.svg"}
           alt="Computer Engineering Department"
           className="courses-page-hero-image"
         />
         <div className="courses-page-hero-content">
           <span className="courses-page-department-badge">Department</span>
-          <h1 className="courses-page-hero-title">{mechanicalCourseData.title}</h1>
+          <h1 className="courses-page-hero-title">{electronicsCourseData.title}</h1>
           <p className="courses-page-hero-subtitle">Empowering future engineers with cutting-edge technology and practical skills</p>
         </div>
       </div>
@@ -104,7 +102,7 @@ export default function ElectronicsPage() {
           </div>
           <div className="courses-page-card">
             <div className="courses-page-card-content">
-              <p className="courses-page-description-text">{mechanicalCourseData.description}</p>
+              <p className="courses-page-description-text">{electronicsCourseData.description}</p>
             </div>
           </div>
         </div>
@@ -230,7 +228,7 @@ export default function ElectronicsPage() {
                       </svg>
                       Vision
                     </h3>
-                    <p className="courses-page-vision-text">{mechanicalCourseData.vision}</p>
+                    <p className="courses-page-vision-text">{electronicsCourseData.vision}</p>
                   </div>
 
                   <div className="courses-page-mission-section">
@@ -255,7 +253,7 @@ export default function ElectronicsPage() {
                       Mission
                     </h3>
                     <div className="courses-page-mission-content">
-                      {mechanicalCourseData.mission.map((item, index) => (
+                      {electronicsCourseData.mission.map((item, index) => (
                         <div key={index} className="courses-page-mission-item">
                           <div dangerouslySetInnerHTML={{ __html: item }} />
                         </div>
@@ -278,7 +276,7 @@ export default function ElectronicsPage() {
                 </div>
                 <div className="courses-page-card-content">
                   <div className="courses-page-faculty-grid">
-                    {mechanicalCourseData.faculty.map((faculty, index) => (
+                    {electronicsCourseData.faculty.map((faculty, index) => (
                       <div key={index} className="courses-page-faculty-card">
                         <div className="courses-page-faculty-image-container">
                           <img src={dummyPerson || "/placeholder.svg"} alt={faculty.name} className="courses-page-faculty-image" />
@@ -324,7 +322,7 @@ export default function ElectronicsPage() {
                 </div>
                 <div className="courses-page-card-content">
                   <div className="courses-page-labs-grid">
-                    {mechanicalCourseData.labs.map((lab, index) => (
+                    {electronicsCourseData.labs.map((lab, index) => (
                       <div key={index} className="courses-page-lab-card">
                         <div className="courses-page-lab-image-container">
                           <img src={lab.image || "/placeholder.svg"} alt={lab.name} className="courses-page-lab-image" />
@@ -354,7 +352,7 @@ export default function ElectronicsPage() {
                 <div className="courses-page-card-content courses-page-timetable-content">
                   <button
                     className="courses-page-download-button courses-page-even-button"
-                    onClick={() => window.open(mechanicalCourseData.timetablePdfEven)}
+                    onClick={() => window.open(electronicsCourseData.timetablePdfEven)}
                   >
                     <Download className="courses-page-download-icon" />
                     Even Semester Time Table 2024-25
@@ -362,7 +360,7 @@ export default function ElectronicsPage() {
 
                   <button
                     className="courses-page-download-button courses-page-odd-button"
-                    onClick={() => window.open(mechanicalCourseData.timetablePdfOdd)}
+                    onClick={() => window.open(electronicsCourseData.timetablePdfOdd)}
                   >
                     <Download className="courses-page-download-icon" />
                     Odd Semester Time Table 2024-25

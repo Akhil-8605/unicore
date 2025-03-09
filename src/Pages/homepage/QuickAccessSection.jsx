@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { BookOpen, Calendar, FileText, GraduationCap, Users, Library, Mail, Clock, ChevronRight, BarChart2, BookMarked, UserCheck, icons } from 'lucide-react';
 import './QuickAccessSection.css';
 
@@ -39,13 +39,13 @@ const quickLinks = [
         title: 'Class Schedule',
         icon: Clock,
         description: 'View and manage your daily class schedule',
-        link: '#'
+        link: '/student-portal/schedule'
     },
     {
         title: 'Email Services',
         icon: Mail,
         description: 'Access university email and communications',
-        link: '#'
+        link: '/email-services'
     },
 ];
 
@@ -112,8 +112,184 @@ function QuickAccess() {
                     </div>
                 </div>
             </div>
+
+            <ResourceCards />
         </section>
     );
 }
+
+const ResourceCards = () => {
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    // Initialize particles
+    const particles = document.querySelectorAll(".quick-access-particle");
+    particles.forEach((particle) => {
+      animateParticle(particle);
+    });
+
+    // Add scroll reveal animation
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("quick-access-in-view");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    const cards = document.querySelectorAll(".quick-access-resource-card");
+    cards.forEach((card) => {
+      observer.observe(card);
+    });
+
+    return () => {
+      cards.forEach((card) => {
+        observer.unobserve(card);
+      });
+    };
+  }, []);
+
+  const animateParticle = (particle) => {
+    // Random position
+    const posX = Math.random() * 100;
+    const posY = Math.random() * 100;
+    particle.style.left = `${posX}%`;
+    particle.style.top = `${posY}%`;
+
+    // Random size
+    const size = Math.random() * 60 + 20;
+    particle.style.width = `${size}px`;
+    particle.style.height = `${size}px`;
+
+    // Random animation duration
+    const duration = Math.random() * 20 + 10;
+    particle.style.animationDuration = `${duration}s`;
+  };
+
+  return (
+    <section className="quick-access-resource-section">
+      <div className="quick-access-section-header">
+        <h2 className="courses-section-courses-title">
+          Academic Resources
+        </h2>
+      </div>
+
+      <div className="quick-access-card-container">
+        <div className="quick-access-resource-card">
+          <div className="quick-access-card-shine"></div>
+          <div className="quick-access-card-background">
+            <div className="quick-access-bg-shape quick-access-shape-1"></div>
+            <div className="quick-access-bg-shape quick-access-shape-2"></div>
+          </div>
+
+          <div className="quick-access-card-content">
+            <h3>Class Test Results</h3>
+            <p>
+              View and download your class test results and performance analytics
+            </p>
+            <a href="/class-test-results" className="quick-access-card-link">
+              <span className="quick-access-link-text">View Test Results</span>
+              <span className="quick-access-arrow-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </span>
+            </a>
+          </div>
+
+          <div className="quick-access-card-decoration"></div>
+          <div className="quick-access-card-glow"></div>
+        </div>
+
+        <div className="quick-access-resource-card">
+          <div className="quick-access-card-shine"></div>
+          <div className="quick-access-card-background">
+            <div className="quick-access-bg-shape quick-access-shape-1"></div>
+            <div className="quick-access-bg-shape quick-access-shape-2"></div>
+          </div>
+
+          <div className="quick-access-card-content">
+            <h3>Previous Year Papers</h3>
+            <p>Access question papers and model answers to prepare better</p>
+            <a href="/pyqs" className="quick-access-card-link">
+              <span className="quick-access-link-text">Browse PYQs</span>
+              <span className="quick-access-arrow-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </span>
+            </a>
+          </div>
+
+          <div className="quick-access-card-decoration"></div>
+          <div className="quick-access-card-glow"></div>
+        </div>
+
+        {/* New Library Card */}
+        <div className="quick-access-resource-card">
+          <div className="quick-access-card-shine"></div>
+          <div className="quick-access-card-background">
+            <div className="quick-access-bg-shape quick-access-shape-1"></div>
+            <div className="quick-access-bg-shape quick-access-shape-2"></div>
+          </div>
+
+          <div className="quick-access-card-content">
+            <h3>Library</h3>
+            <p>Access a vast collection of books and academic journals</p>
+            <a href="/library" className="quick-access-card-link">
+              <span className="quick-access-link-text">Visit Library</span>
+              <span className="quick-access-arrow-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </span>
+            </a>
+          </div>
+
+          <div className="quick-access-card-decoration"></div>
+          <div className="quick-access-card-glow"></div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 
 export default QuickAccess;

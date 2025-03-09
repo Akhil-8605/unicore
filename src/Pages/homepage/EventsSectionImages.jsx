@@ -111,7 +111,7 @@ export default function NoticeBoard() {
 
     if (isLoading) {
         return (
-            <div className="events-section-loading-container">
+            <div className="loading-container">
                 <div className="events-section-image-spinner">
                     <img src={loader} alt="" />
                 </div>

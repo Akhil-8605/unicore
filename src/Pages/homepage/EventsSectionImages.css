@@ -1,5 +1,5 @@
 /* Loading screen */
-.events-section-loading-container {
+.loading-container {
   display: flex;
   height: 100vh;
   width: 100%;
@@ -28,7 +28,7 @@
   }
 }
 
-.events-section-loading-container p {
+.loading-container p {
   font-size: 1.25rem;
   font-weight: 500;
   color: #007bff;
