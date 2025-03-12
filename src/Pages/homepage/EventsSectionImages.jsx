@@ -1,123 +1,80 @@
-import { useState, useEffect } from "react"
-import "./EventsSectionImages.css"
-import loader from "../../Images/loading.gif"
-const images = [
-    {
-        url: "https://raw.githubusercontent.com/Akhil-8605/unicore-assets/refs/heads/main/notice1.jpg",
-    },
-    {
-        url: "https://raw.githubusercontent.com/Akhil-8605/unicore-assets/refs/heads/main/notice2.jpg",
-    },
-    {
-        url: "https://raw.githubusercontent.com/Akhil-8605/unicore-assets/refs/heads/main/notice3.jpg",
-    },
-    {
-        url: "https://raw.githubusercontent.com/Akhil-8605/unicore-assets/refs/heads/main/notice4.jpg",
-    },
-    {
-        url: "https://raw.githubusercontent.com/Akhil-8605/unicore-assets/refs/heads/main/notice5.jpg",
-    },
-    {
-        url: "https://raw.githubusercontent.com/Akhil-8605/unicore-assets/refs/heads/main/notice6.jpg",
-    },
-    {
-        url: "https://raw.githubusercontent.com/Akhil-8605/unicore-assets/refs/heads/main/notice7.jpg",
-    },
-    {
-        url: "https://raw.githubusercontent.com/Akhil-8605/unicore-assets/refs/heads/main/notice8.jpg",
-    },
-    {
-        url: "https://raw.githubusercontent.com/Akhil-8605/unicore-assets/refs/heads/main/notice9.jpg",
-    },
-    {
-        url: "https://raw.githubusercontent.com/Akhil-8605/unicore-assets/refs/heads/main/notice10.jpg",
-    },
-    {
-        url: "https://raw.githubusercontent.com/Akhil-8605/unicore-assets/refs/heads/main/notice11.jpg",
-    },
-    {
-        url: "https://raw.githubusercontent.com/Akhil-8605/unicore-assets/refs/heads/main/notice12.jpg",
-    },
-    {
-        url: "https://raw.githubusercontent.com/Akhil-8605/unicore-assets/refs/heads/main/notice13.jpg",
-    },
-    {
-        url: "https://raw.githubusercontent.com/Akhil-8605/unicore-assets/refs/heads/main/notice14.jpg",
-    },
-    {
-        url: "https://raw.githubusercontent.com/Akhil-8605/unicore-assets/refs/heads/main/notice15.jpg",
-    },
-    {
-        url: "https://raw.githubusercontent.com/Akhil-8605/unicore-assets/refs/heads/main/notice16.jpg",
-    },
-    {
-        url: "https://raw.githubusercontent.com/Akhil-8605/unicore-assets/refs/heads/main/notice17.jpg",
-    },
-    {
-        url: "https://raw.githubusercontent.com/Akhil-8605/unicore-assets/refs/heads/main/notice18.jpg",
-    },    
-]
+import { useState, useEffect } from "react";
+import "./EventsSectionImages.css";
+import loader from "../../Images/loading.gif";
+
+// Firestore imports (modular v9)
+import { collection, getDocs } from "firebase/firestore";
+import { firestore } from "../../Authentication/firebase"; // Adjust the path as needed
 
 // Random rotation for notices
 const getRandomRotation = () => {
-    return Math.random() * 6 - 3 // Between -3 and 3 degrees
-}
+    return Math.random() * 6 - 3; // Between -3 and 3 degrees
+};
 
 // Random pin colors
-const pinColors = ["#e74c3c", "#3498db", "#f1c40f", "#2ecc71", "#9b59b6"]
+const pinColorsArray = ["#e74c3c", "#3498db", "#f1c40f", "#2ecc71", "#9b59b6"];
 const getRandomPinColor = () => {
-    return pinColors[Math.floor(Math.random() * pinColors.length)]
-}
+    return pinColorsArray[Math.floor(Math.random() * pinColorsArray.length)];
+};
 
 export default function NoticeBoard() {
-    const [selectedImage, setSelectedImage] = useState(null)
-    const [isLoading, setIsLoading] = useState(true)
-    const [rotations, setRotations] = useState([])
-    const [pinPositions, setPinPositions] = useState([])
-    const [pinColors, setPinColors] = useState([])
+    const [images, setImages] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [rotations, setRotations] = useState([]);
+    const [pinPositions, setPinPositions] = useState([]);
+    const [pinColors, setPinColors] = useState([]);
+    const [selectedImage, setSelectedImage] = useState(null);
 
+    // Fetch notice images from Firestore's "NoticeboradImages" collection
     useEffect(() => {
-        // Generate random rotations and pin positions for each notice
-        const newRotations = images.map(() => getRandomRotation())
-        const newPinPositions = images.map(() => ({
-            left: 15 + Math.random() * 70, // Between 15% and 85%
-            top: 5 + Math.random() * 10, // Between 5% and 15%
-        }))
-        const newPinColors = images.map(() => getRandomPinColor())
+        async function fetchNotices() {
+            try {
+                const querySnapshot = await getDocs(collection(firestore, "NoticeboradImages"));
+                const imgs = [];
+                querySnapshot.forEach((docSnap) => {
+                    imgs.push({ id: docSnap.id, ...docSnap.data() });
+                });
+                setImages(imgs);
 
-        setRotations(newRotations)
-        setPinPositions(newPinPositions)
-        setPinColors(newPinColors)
-
-        // Simulate loading time
-        const timer = setTimeout(() => {
-            setIsLoading(false)
-        }, 1500)
-
-        return () => clearTimeout(timer)
-    }, [])
+                // Generate random rotations and pin positions for each notice
+                const newRotations = imgs.map(() => getRandomRotation());
+                const newPinPositions = imgs.map(() => ({
+                    left: 15 + Math.random() * 70, // Between 15% and 85%
+                    top: 5 + Math.random() * 10, // Between 5% and 15%
+                }));
+                const newPinColors = imgs.map(() => getRandomPinColor());
+                setRotations(newRotations);
+                setPinPositions(newPinPositions);
+                setPinColors(newPinColors);
+            } catch (error) {
+                console.error("Error fetching notices:", error);
+            }
+            setIsLoading(false);
+        }
+        fetchNotices();
+    }, []);
 
     // Close modal when Escape key is pressed
     useEffect(() => {
         const handleKeyDown = (e) => {
             if (e.key === "Escape") {
-                setSelectedImage(null)
+                setSelectedImage(null);
             }
-        }
+        };
 
-        window.addEventListener("keydown", handleKeyDown)
-        return () => window.removeEventListener("keydown", handleKeyDown)
-    }, [])
+        window.addEventListener("keydown", handleKeyDown);
+        return () => window.removeEventListener("keydown", handleKeyDown);
+    }, []);
 
     if (isLoading) {
         return (
             <div className="loading-container">
                 <div className="events-section-image-spinner">
-                    <img src={loader} alt="" />
+                    <img src={loader} alt="Loading..." />
                 </div>
                 <p>Loading Notice Board...</p>
             </div>
-        )
+        );
     }
 
     return (
@@ -152,8 +109,11 @@ export default function NoticeBoard() {
                                 {/* Notice */}
                                 <div className="events-section-notice-paper">
                                     <div className="events-section-notice-image-container">
-                                        <img src={image.url || "/placeholder.svg"} alt={`Notice ${index + 1}`} className="events-section-notice-image" />
-
+                                        <img
+                                            src={image.imageLink || "/placeholder.svg"}
+                                            alt={`Notice ${index + 1}`}
+                                            className="events-section-notice-image"
+                                        />
                                         {/* Overlay on hover */}
                                         <div className="events-section-notice-overlay">
                                             <div className="events-section-view-button">
@@ -200,14 +160,16 @@ export default function NoticeBoard() {
                                 <line x1="6" y1="6" x2="18" y2="18"></line>
                             </svg>
                         </button>
-
                         <div className="events-section-modal-image-container">
-                            <img src={selectedImage.url || "/placeholder.svg"} alt="Selected notice" className="events-section-modal-image" />
+                            <img
+                                src={selectedImage.imageLink || "/placeholder.svg"}
+                                alt="Selected notice"
+                                className="events-section-modal-image"
+                            />
                         </div>
                     </div>
                 </div>
             )}
         </div>
-    )
+    );
 }
-

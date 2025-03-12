@@ -36,6 +36,7 @@ import MechanicalPage from "./Pages/courses/MechanicalEnggPage.jsx";
 import EmailServicesPage from "./Pages/EmailServicesPage.jsx";
 
 import loader from "./Images/loading.gif";
+import AdminNoticePage from "./Admin/AdminNoticeBoard.jsx";
 
 function App() {
 
@@ -114,6 +115,10 @@ function App() {
             <Route
               path="/admin/academic-calender"
               element={<AdminCalender />}
+            />
+            <Route
+              path="/admin/noticeboard"
+              element={<AdminNoticePage />}
             />
           </Route>
 

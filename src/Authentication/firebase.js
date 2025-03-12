@@ -23,4 +23,6 @@ const storage = getStorage(app);
 const functions = getFunctions(app);
 const sendEventEmail = httpsCallable(functions, "sendEventEmail");
 
-export { auth, provider, signInWithPopup, db, storage, sendEventEmail };
+const firestore = getFirestore(app);
+
+export { auth, provider, signInWithPopup, db, storage, sendEventEmail ,firestore};

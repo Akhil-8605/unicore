@@ -25,6 +25,7 @@ import {
     FileTextIcon,
     ClipboardCheck,
     CalendarClock,
+    Newspaper,
 } from "lucide-react";
 import "../Student/StudentPortalLayout.css";
 
@@ -37,6 +38,7 @@ export default function AdminPortalLayout({ children }) {
             { name: "Image Gallery", href: "/admin", icon: Image },
             { name: "Academic Calendar", href: "/admin/academic-calender", icon: CalendarClock},
             { name: "Events", href: "/admin/events", icon: Calendar },
+            { name: "Notice Board", href: "/admin/noticeboard", icon: Newspaper },
             { name: "Library", href: "/admin/library", icon: Library },
             { name: "Books Request", href: "/admin/books-request", icon: BookOpen },
             { name: "Upcoming Exams", href: "/admin/exams", icon: CalendarClock },

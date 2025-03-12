@@ -1,183 +1,172 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Upload, Pencil, Trash2 } from "lucide-react";
 import "./AdminImageGallery.css";
 import AdminPortalLayout from "./AdminPortalLayout";
+import { IKContext, IKUpload } from "imagekitio-react";
+import { ImageGalleryProvider } from "../context";
 
-// ImageKit API endpoints
-const IMAGEKIT_UPLOAD_URL = "https://upload.imagekit.io/api/v1/files/upload";
-const IMAGEKIT_LIST_URL = "https://api.imagekit.io/v1/files"; // Listing files (requires auth)
-const IMAGEKIT_DELETE_URL = (fileId) => `https://api.imagekit.io/v1/files/${fileId}`;
-
-// Environment variables
-const PUBLIC_KEY = process.env.REACT_APP_IMAGEKIT_PUBLIC_KEY;
-const UPLOAD_PRESET = process.env.REACT_APP_IMAGEKIT_UPLOAD_PRESET;
-const URL_ENDPOINT = process.env.REACT_APP_IMAGEKIT_URL_ENDPOINT;
-const PRIVATE_KEY = process.env.REACT_APP_IMAGEKIT_PRIVATE_KEY; 
+// Firestore imports (modular v9)
+import { collection, addDoc, getDocs, updateDoc, deleteDoc, doc } from "firebase/firestore";
+import { firestore } from "../Authentication/firebase"; // Adjust the path as needed
 
 export default function GalleryAdminPage() {
   const [activeTab, setActiveTab] = useState("gallery");
-  const [images, setImages] = useState([]);
+  const [imageGallery, setImageGallery] = useState([]);
   const [editingImage, setEditingImage] = useState(null);
+  const [imageUploadedData, setImageUploadedData] = useState(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const [preview, setPreview] = useState(null);
-  const [uploadFile, setUploadFile] = useState(null);
-  const [editFile, setEditFile] = useState(null);
+  // States for replacement image in the edit modal
+  const [replacementPreview, setReplacementPreview] = useState(null);
+  const [replacementImageData, setReplacementImageData] = useState(null);
 
-  // Fetch images from ImageKit on mount
+  const urlEndpoint = process.env.REACT_APP_IMAGEKIT_URL_ENDPOINT;
+  const publicKey = process.env.REACT_APP_IMAGEKIT_PUBLIC_KEY;
+
+  // Authenticator for ImageKit upload requests
+  const authenticator = async () => {
+    try {
+      const response = await fetch("http://localhost:4000/auth");
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Request failed with status ${response.status}: ${errorText}`);
+      }
+      const data = await response.json();
+      const { signature, expire, token } = data;
+      console.log(data);
+      return { signature, expire, token };
+    } catch (error) {
+      throw new Error(`Authentication request failed: ${error.message}`);
+    }
+  };
+
+  // Fetch images from Firestore when the component mounts
   useEffect(() => {
+    async function fetchImages() {
+      try {
+        const querySnapshot = await getDocs(collection(firestore, "GalleryImages"));
+        const images = [];
+        querySnapshot.forEach((docSnap) => {
+          images.push({ id: docSnap.id, ...docSnap.data() });
+        });
+        setImageGallery(images);
+      } catch (error) {
+        console.error("Error fetching images from Firestore", error);
+      }
+    }
     fetchImages();
   }, []);
 
-  // Fetch images using ImageKit List API
-  const fetchImages = async () => {
+  // Delete image: remove from Firestore and call backend to delete from ImageKit
+  const deleteImage = async (docId, fileId) => {
     try {
-      const response = await fetch(IMAGEKIT_LIST_URL, {
-        headers: {
-          Authorization: "Basic " + btoa(PUBLIC_KEY + ":" + PRIVATE_KEY),
-        },
-      });
-      const data = await response.json();
-      // The list API returns an array of file objects in data.results
-      setImages(data.results || []);
+      await deleteDoc(doc(firestore, "GalleryImages", docId));
     } catch (error) {
-      console.error("Error fetching images:", error);
-    }
-  };
-
-  // Upload a new image via ImageKit
-  const handleUpload = async (e) => {
-    e.preventDefault();
-    if (!uploadFile) {
-      alert("Please select an image file to upload.");
+      console.error("Error deleting from Firestore", error);
+      alert("Error deleting image from database");
       return;
     }
-    setIsUploading(true);
     try {
-      const formData = new FormData();
-      formData.append("file", uploadFile);
-      formData.append("fileName", uploadFile.name);
-      formData.append("upload_preset", UPLOAD_PRESET);
-      // Append custom metadata (as a JSON string)
-      formData.append(
-        "customMetadata",
-        JSON.stringify({
-          title: e.currentTarget.title.value,
-          description: e.currentTarget.description.value,
-          alt: e.currentTarget.alt.value,
-        })
-      );
-
-      const response = await fetch(IMAGEKIT_UPLOAD_URL, {
+      await fetch("http://localhost:4000/deleteImage", {
         method: "POST",
-        body: formData,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ fileId: fileId }),
       });
-      const data = await response.json();
-      if (data.error) {
-        throw new Error(data.error.message);
-      }
-      alert("Image uploaded successfully!");
-      e.currentTarget.reset();
-      setPreview(null);
-      setUploadFile(null);
-      fetchImages();
     } catch (error) {
-      console.error("Error uploading image:", error);
-      alert("Failed to upload image. Please try again.");
-    } finally {
-      setIsUploading(false);
+      console.error("Error deleting from ImageKit", error);
+      alert("Error deleting image from ImageKit");
     }
+    setImageGallery(imageGallery.filter((img) => img.id !== docId));
   };
 
-  // Delete an image using ImageKit Delete API
-  const handleDelete = async (fileId) => {
-    if (!window.confirm("Are you sure you want to delete this image?")) return;
-    try {
-      const response = await fetch(IMAGEKIT_DELETE_URL(fileId), {
-        method: "DELETE",
-        headers: {
-          Authorization: "Basic " + btoa(PUBLIC_KEY + ":" + PRIVATE_KEY),
-        },
-      });
-      const data = await response.json();
-      if (data.error) {
-        throw new Error(data.error.message);
-      }
-      fetchImages();
-    } catch (error) {
-      console.error("Error deleting image:", error);
-      alert("Failed to delete image. Please try again.");
-    }
-  };
-
-  // Open the edit modal with the selected image data
+  // Open the edit modal with the selected image details
   const handleEdit = (image) => {
     setEditingImage(image);
     setIsDialogOpen(true);
   };
 
-  // Update image by re-uploading with new metadata (since direct metadata update isn’t supported)
+  // Update image details and optionally replace the image file
   const handleUpdate = async (e) => {
     e.preventDefault();
-    if (!editingImage) return;
+    const formData = new FormData(e.currentTarget);
+    const newTitle = formData.get("title");
 
-    // In this demo, if a new file is provided, we re-upload the image with new metadata and delete the old one.
-    if (editFile) {
+    let updatedFields = {
+      title: newTitle,
+    };
+
+    // If a replacement image was uploaded, update the image link and delete the old one from ImageKit
+    if (replacementImageData) {
       try {
-        const formData = new FormData();
-        formData.append("file", editFile);
-        formData.append("fileName", editFile.name);
-        formData.append("upload_preset", UPLOAD_PRESET);
-        formData.append(
-          "customMetadata",
-          JSON.stringify({
-            title: e.currentTarget.title.value,
-            description: e.currentTarget.description.value,
-            alt: e.currentTarget.alt.value,
-          })
-        );
-
-        const response = await fetch(IMAGEKIT_UPLOAD_URL, {
+        await fetch("http://localhost:4000/deleteImage", {
           method: "POST",
-          body: formData,
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ fileId: editingImage.fileId }),
         });
-        const data = await response.json();
-        if (data.error) {
-          throw new Error(data.error.message);
-        }
-        // Delete the old image file
-        await handleDelete(editingImage.fileId);
-        alert("Image updated successfully!");
-        fetchImages();
-        setIsDialogOpen(false);
-        setEditingImage(null);
-        setEditFile(null);
       } catch (error) {
-        console.error("Error updating image file:", error);
-        alert("Failed to update image file. Please try again.");
+        console.error("Error deleting old image from ImageKit", error);
       }
-    } else {
-      // Updating metadata without file replacement isn’t supported via ImageKit’s API directly.
-      alert("Updating metadata without file replacement is not supported in this demo.");
+      updatedFields.imageLink = replacementImageData.url;
+      updatedFields.fileId = replacementImageData.fileId;
     }
+
+    try {
+      const docRef = doc(firestore, "GalleryImages", editingImage.id);
+      await updateDoc(docRef, updatedFields);
+    } catch (error) {
+      console.error("Error updating Firestore record", error);
+      alert("Error updating image in database");
+      return;
+    }
+
+    const updatedImage = { ...editingImage, ...updatedFields };
+    setImageGallery(imageGallery.map((img) => (img.id === editingImage.id ? updatedImage : img)));
+    setIsDialogOpen(false);
+    setReplacementPreview(null);
+    setReplacementImageData(null);
   };
 
-  // Handle file selection for new uploads
+  // Show a preview when selecting a new image for upload
   const handleImageChange = (e) => {
     const file = e.target.files?.[0];
     if (file) {
-      setUploadFile(file);
       const reader = new FileReader();
-      reader.onloadend = () => setPreview(reader.result);
+      reader.onloadend = () => {
+        setPreview(reader.result);
+      };
       reader.readAsDataURL(file);
     }
   };
 
-  // Handle file selection for replacing an image in the edit modal
-  const handleEditImageChange = (e) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setEditFile(file);
+  // Add a new image: upload to ImageKit then store the image link and title in Firestore
+  const addImage = async (e) => {
+    e.preventDefault();
+    if (!imageUploadedData) {
+      alert("Network Error");
+      return;
+    }
+    const title = e.target.title.value;
+    try {
+      const docRef = await addDoc(collection(firestore, "GalleryImages"), {
+        imageLink: imageUploadedData.url,
+        title: title,
+        fileId: imageUploadedData.fileId,
+      });
+      const newImage = {
+        id: docRef.id,
+        imageLink: imageUploadedData.url,
+        title: title,
+        fileId: imageUploadedData.fileId,
+      };
+      setImageGallery([...imageGallery, newImage]);
+      alert("Image uploaded successfully!");
+      setPreview(null);
+      setIsUploading(false);
+      setActiveTab("gallery");
+    } catch (error) {
+      console.error("Error saving to Firestore", error);
+      alert("Error saving image to database");
     }
   };
 
@@ -189,13 +178,12 @@ export default function GalleryAdminPage() {
           <div className="admin-image-card-header">
             <h1>Gallery Management</h1>
           </div>
-
           <div className="admin-image-tabs">
             <button
               className={`admin-image-tab ${activeTab === "gallery" ? "active" : ""}`}
               onClick={() => setActiveTab("gallery")}
             >
-              Gallery Images
+              Gallery
             </button>
             <button
               className={`admin-image-tab ${activeTab === "upload" ? "active" : ""}`}
@@ -207,13 +195,10 @@ export default function GalleryAdminPage() {
 
           {activeTab === "gallery" && (
             <div className="admin-image-gallery-grid">
-              {images.map((image) => (
-                <div key={image.fileId || image.id} className="admin-image-gallery-item">
+              {imageGallery.map((image) => (
+                <div key={image.id} className="admin-image-gallery-item">
                   <div className="admin-image-image-container">
-                    <img
-                      src={image.url || "/placeholder.svg"}
-                      alt={image.customMetadata?.alt || "Image"}
-                    />
+                    <img src={image.imageLink || "/placeholder.svg"} alt={image.title} />
                     <div className="admin-image-image-overlay">
                       <button
                         className="admin-image-edit-button"
@@ -223,15 +208,14 @@ export default function GalleryAdminPage() {
                       </button>
                       <button
                         className="admin-image-delete-button"
-                        onClick={() => handleDelete(image.fileId)}
+                        onClick={() => deleteImage(image.id, image.fileId)}
                       >
                         <Trash2 />
                       </button>
                     </div>
                   </div>
                   <div className="admin-image-image-info">
-                    <h3>{image.customMetadata?.title || "No Title"}</h3>
-                    <p>{image.customMetadata?.description || ""}</p>
+                    <h3>{image.title}</h3>
                   </div>
                 </div>
               ))}
@@ -239,69 +223,58 @@ export default function GalleryAdminPage() {
           )}
 
           {activeTab === "upload" && (
-            <form onSubmit={handleUpload} className="admin-image-upload-form">
-              <div className="admin-image-form-group">
-                <label htmlFor="image">Gallery Image</label>
-                <div className="admin-image-upload-container">
-                  <div className="admin-image-preview-container">
-                    {preview ? (
-                      <img src={preview || "/placeholder.svg"} alt="Preview" />
-                    ) : (
-                      <div className="admin-image-upload-placeholder">
-                        <Upload />
+            <div>
+              <ImageGalleryProvider value={{ addImage, deleteImage, imageGallery }}>
+                <form onSubmit={addImage} className="admin-image-upload-form" id="form">
+                  <div className="admin-image-form-group">
+                    <label htmlFor="image">Gallery Image</label>
+                    <div className="admin-image-upload-container">
+                      <div className="admin-image-preview-container">
+                        {preview ? (
+                          <img src={preview || "/placeholder.svg"} alt="Preview" />
+                        ) : (
+                          <div className="admin-image-upload-placeholder">
+                            <Upload />
+                          </div>
+                        )}
                       </div>
-                    )}
+                      <IKContext
+                        publicKey={publicKey}
+                        urlEndpoint={urlEndpoint}
+                        authenticator={authenticator}
+                      >
+                        <p>Upload an image</p>
+                        <IKUpload
+                          fileName="image-gallery.png"
+                          onError={(error) => {
+                            console.error("Error uploading image: ", error);
+                            alert("Error uploading image: Network Error");
+                          }}
+                          onSuccess={(data) => {
+                            setImageUploadedData(data);
+                            console.log("Image uploaded successfully: ", data);
+                          }}
+                          onChange={handleImageChange}
+                        />
+                      </IKContext>
+                    </div>
                   </div>
-                  <input
-                    id="image"
-                    type="file"
-                    accept="image/*"
-                    required
-                    onChange={handleImageChange}
-                  />
-                </div>
-              </div>
-
-              <div className="admin-image-form-group">
-                <label htmlFor="title">Image Title</label>
-                <input
-                  id="title"
-                  name="title"
-                  type="text"
-                  required
-                  placeholder="Enter a title for the image"
-                />
-              </div>
-
-              <div className="admin-image-form-group">
-                <label htmlFor="description">Description</label>
-                <textarea
-                  id="description"
-                  name="description"
-                  required
-                  placeholder="Describe the image content"
-                />
-              </div>
-
-              <div className="admin-image-form-group">
-                <label htmlFor="alt">Alt Text</label>
-                <input
-                  id="alt"
-                  name="alt"
-                  type="text"
-                  required
-                  placeholder="Provide alternative text for accessibility"
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="admin-image-submit-button"
-                disabled={isUploading}
-              >
-                {isUploading ? "Uploading..." : "Upload to Gallery"}
-              </button>
-            </form>
+                  <div className="admin-image-form-group">
+                    <label htmlFor="title">Image Title</label>
+                    <input
+                      id="title"
+                      name="title"
+                      type="text"
+                      required
+                      placeholder="Enter a title for the image"
+                    />
+                  </div>
+                  <button type="submit" className="admin-image-submit-button" disabled={isUploading}>
+                    {isUploading ? "Uploading..." : "Upload to Gallery"}
+                  </button>
+                </form>
+              </ImageGalleryProvider>
+            </div>
           )}
 
           {isDialogOpen && editingImage && (
@@ -313,52 +286,67 @@ export default function GalleryAdminPage() {
                     className="admin-image-close-button"
                     onClick={() => setIsDialogOpen(false)}
                   >
-                    &times;
+                    ×
                   </button>
                 </div>
                 <form onSubmit={handleUpdate} className="admin-image-edit-form">
-                  <div className="admin-image-form-group">
-                    <label htmlFor="edit-title">Title</label>
+                  <div className="admin-image-form-group" style={{ width: "450px", maxWidth: "90%" }}>
+                    <label htmlFor="admin-image-edit-title">Title</label>
                     <input
                       id="edit-title"
                       name="title"
                       type="text"
-                      defaultValue={editingImage.customMetadata?.title || ""}
+                      defaultValue={editingImage?.title}
                       required
                     />
                   </div>
-
-                  <div className="admin-image-form-group">
-                    <label htmlFor="edit-description">Description</label>
-                    <textarea
-                      id="edit-description"
-                      name="description"
-                      defaultValue={editingImage.customMetadata?.description || ""}
-                      required
-                    />
+                  {/* Replacement image upload section */}
+                  <div className="admin-image-form-group" style={{ width: "450px" }}>
+                    <label htmlFor="replacement">Replace Image (optional)</label>
+                    <div className="admin-image-upload-container">
+                      <div style={{ width: "450px", maxWidth: "90%" , margin: "0 auto"}}>
+                        {replacementPreview ? (
+                          <div className="admin-image-image-container">
+                            <img
+                              src={replacementPreview || "/placeholder.svg"}
+                              alt={editingImage.title}
+                            />
+                          </div>
+                        ) : (
+                          <div className="admin-image-upload-placeholder">
+                            <Upload />
+                          </div>
+                        )}
+                      </div>
+                      <IKContext
+                        publicKey={publicKey}
+                        urlEndpoint={urlEndpoint}
+                        authenticator={authenticator}
+                      >
+                        <IKUpload
+                          fileName="replacement-image.png"
+                          onError={(error) => {
+                            console.error("Error uploading replacement image: ", error);
+                            alert("Error uploading replacement image");
+                          }}
+                          onSuccess={(data) => {
+                            setReplacementImageData(data);
+                            console.log("Replacement image uploaded successfully: ", data);
+                          }}
+                          onChange={(e) => {
+                            const file = e.target.files?.[0];
+                            if (file) {
+                              const reader = new FileReader();
+                              reader.onloadend = () => {
+                                setReplacementPreview(reader.result);
+                              };
+                              reader.readAsDataURL(file);
+                            }
+                          }}
+                        />
+                      </IKContext>
+                    </div>
                   </div>
-
-                  <div className="admin-image-form-group">
-                    <label htmlFor="edit-alt">Alt Text</label>
-                    <input
-                      id="edit-alt"
-                      name="alt"
-                      type="text"
-                      defaultValue={editingImage.customMetadata?.alt || ""}
-                      required
-                    />
-                  </div>
-
-                  <div className="admin-image-form-group">
-                    <label htmlFor="edit-image">Replace Image (optional)</label>
-                    <input
-                      id="edit-image"
-                      type="file"
-                      accept="image/*"
-                      onChange={handleEditImageChange}
-                    />
-                  </div>
-
                   <div className="admin-image-modal-actions">
                     <button
                       type="button"

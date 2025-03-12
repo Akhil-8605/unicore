@@ -194,7 +194,8 @@ const AuthPage = () => {
       const user = result.user;
       const role =
         user.email === "akhileshadam186@gmail.com" ||
-        user.email === "onkarsakv99@gmail.com"
+        user.email === "sanjukanki@gmail.com" ||
+        user.email === "unicore.akhil@gmail.com"
           ? "admin"
           : "student";
       setCurrentUserUid(user.uid);

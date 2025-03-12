@@ -1,62 +1,52 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import './ImageGallery.css';
-import CampusImg from "../../Images/campus-img.png"
-import CampusImg1 from "../../Images/campus-img1.png"
-import CampusImg2 from "../../Images/campus-img2.png"
-import CampusImg3 from "../../Images/campus-img3.png"
-import CampusImg4 from "../../Images/campus-img-students.png"
-import CampusImg5 from "../../Images/campus-img4.png"
-import CampusImgStudents from "../../Images/campus-img-students2.png"
-import CampusImgLibrary from "../../Images/campus-img-library.png"
-
-const images = [
-    {
-        url: CampusImg,
-        caption: "Campus"
-    },
-    {
-        url: CampusImg1,
-        caption: "Campus"
-    },
-    {
-        url: CampusImg2,
-        caption: "Campus Ground"
-    },
-    {
-        url: CampusImg3,
-    },
-    {
-        url: CampusImg4,
-    },
-    {
-        url: CampusImg5,
-    },
-    {
-        url: CampusImgStudents,
-    },
-    {
-        url: CampusImgLibrary,
-        caption: "Librabry"
-    },
-];
-
+import { collection, getDocs } from "firebase/firestore";
+import { firestore } from "../../Authentication/firebase"; // Adjust the path as needed
+import loader from "../../Images/loading.gif"
 const ImageGallery = () => {
+    const [images, setImages] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isTransitioning, setIsTransitioning] = useState(false);
     const [touchStart, setTouchStart] = useState(null);
     const [touchEnd, setTouchEnd] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
 
+    // Fetch images from Firestore on mount
     useEffect(() => {
-        const timer = setInterval(() => {
-            handleNext();
-        }, 4000);
-
-        return () => clearInterval(timer);
+        async function fetchImages() {
+            try {
+                const querySnapshot = await getDocs(collection(firestore, "GalleryImages"));
+                const fetchedImages = querySnapshot.docs
+                    .map(doc => ({
+                        id: doc.id,
+                        url: doc.data().imageLink,
+                        caption: doc.data().title,
+                    }))
+                    .reverse(); // Reverse the order so last item comes first
+                setImages(fetchedImages);
+            } catch (error) {
+                console.error("Error fetching images from Firestore:", error);
+            } finally {
+                setIsLoading(false);
+            }
+        }
+        fetchImages();
     }, []);
 
+
+    // Automatic slider change (only if images are loaded)
+    useEffect(() => {
+        if (!isLoading && images.length > 0) {
+            const timer = setInterval(() => {
+                handleNext();
+            }, 4000);
+            return () => clearInterval(timer);
+        }
+    }, [images, isLoading]);
+
     const handlePrevious = () => {
-        if (!isTransitioning) {
+        if (!isTransitioning && images.length > 0) {
             setIsTransitioning(true);
             setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
             setTimeout(() => setIsTransitioning(false), 500);
@@ -64,7 +54,7 @@ const ImageGallery = () => {
     };
 
     const handleNext = () => {
-        if (!isTransitioning) {
+        if (!isTransitioning && images.length > 0) {
             setIsTransitioning(true);
             setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
             setTimeout(() => setIsTransitioning(false), 500);
@@ -83,15 +73,27 @@ const ImageGallery = () => {
     const handleTouchEnd = () => {
         if (!touchStart || !touchEnd) return;
         const distance = touchStart - touchEnd;
-        const isLeftSwipe = distance > 50;
-        const isRightSwipe = distance < -50;
-
-        if (isLeftSwipe) {
+        if (distance > 50) {
             handleNext();
-        } else if (isRightSwipe) {
+        } else if (distance < -50) {
             handlePrevious();
         }
     };
+
+    if (isLoading) {
+        return (
+            <div className="loading-container">
+                <div className="events-section-image-spinner">
+                    <img src={loader} alt="" />
+                </div>
+                <p>Loading Images...</p>
+            </div>
+        )
+    }
+
+    if (images.length === 0) {
+        return <div className="gallery-container">No images found.</div>;
+    }
 
     return (
         <div className="gallery-container">
@@ -115,8 +117,7 @@ const ImageGallery = () => {
                                     <button
                                         key={index}
                                         onClick={() => setCurrentIndex(index)}
-                                        className={`gallery-progress-dot ${currentIndex === index ? 'active' : 'inactive'
-                                            }`}
+                                        className={`gallery-progress-dot ${currentIndex === index ? 'active' : 'inactive'}`}
                                         aria-label={`Go to slide ${index + 1}`}
                                     />
                                 ))}
@@ -144,10 +145,9 @@ const ImageGallery = () => {
             <div className="gallery-thumbnails-container">
                 {images.map((image, index) => (
                     <div
-                        key={index}
+                        key={image.id}
                         onClick={() => setCurrentIndex(index)}
-                        className={`gallery-thumbnail ${currentIndex === index ? 'active' : 'inactive'
-                            }`}
+                        className={`gallery-thumbnail ${currentIndex === index ? 'active' : 'inactive'}`}
                     >
                         <img
                             src={image.url}
