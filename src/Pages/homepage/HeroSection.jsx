@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import './HeroSection.css'
 import { Link } from 'react-router-dom'
-
+import { useAuth } from '../../Authentication/AuthProvider'
 export default function Hero() {
   const parallaxRef = useRef(null)
   const canvasRef = useRef(null)
@@ -76,6 +76,8 @@ export default function Hero() {
     }
   }, [])
 
+  const { user } = useAuth();
+
   return (
     <div className="hero-section-container">
       <canvas ref={canvasRef} className="hero-section-grid-background"></canvas>
@@ -91,7 +93,7 @@ export default function Hero() {
           </p>
 
           <div className="hero-section-cta-container">
-            <Link to={'/student-portal'}>
+            <Link to={`${user.role === "admin" ? '/admin' :'/student-portal'}`}>
               <button className="hero-section-primary-button">
                 Get Started
                 <svg className="hero-section-arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -103,7 +105,7 @@ export default function Hero() {
         </div>
 
         <div ref={parallaxRef} className="hero-section-floating-elements">
-          <a href='/library' style={{textDecoration: "none"}} className="hero-section-floating-card hero-section-card1">
+          <a href='/library' style={{ textDecoration: "none" }} className="hero-section-floating-card hero-section-card1">
             <svg className="hero-section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
               <path d="M6 12v5c3 3 9 3 12 0v-5" />
@@ -112,7 +114,7 @@ export default function Hero() {
             <p>AI-Powered Education</p>
           </a>
 
-          <a href='/email-services' style={{textDecoration: "none"}} className="hero-section-floating-card hero-section-card2">
+          <a href='/email-services' style={{ textDecoration: "none" }} className="hero-section-floating-card hero-section-card2">
             <svg className="hero-section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
               <circle cx="9" cy="7" r="4" />
@@ -123,7 +125,7 @@ export default function Hero() {
             <p>Connected Campus</p>
           </a>
 
-          <a href='/student-portal/schedule' style={{textDecoration: "none"}} className="hero-section-floating-card card3">
+          <a href='/student-portal/schedule' style={{ textDecoration: "none" }} className="hero-section-floating-card card3">
             <svg className="hero-section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
               <line x1="16" y1="2" x2="16" y2="6" />

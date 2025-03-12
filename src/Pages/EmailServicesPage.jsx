@@ -6,7 +6,7 @@ import Footer from "../Components/Footer"
 function EmailPortal() {
     // When clicked, open a new tab searching for the email address in Gmail
     const handleViewEmails = () => {
-        window.open("https://mail.google.com/mail/u/0/#search/unicore@gmail.com", "_blank")
+        window.open("https://mail.google.com/mail/u/0/#search/unicore.akhil@gmail.com", "_blank")
     }
 
     return (
