@@ -38,7 +38,7 @@ export default function AdminNoticePage() {
     useEffect(() => {
         async function fetchNotices() {
             try {
-                const querySnapshot = await getDocs(collection(firestore, "NoticeboradImages"));
+                const querySnapshot = await getDocs(collection(firestore, "noticeboradImages"));
                 const images = [];
                 querySnapshot.forEach((docSnap) => {
                     images.push({ id: docSnap.id, ...docSnap.data() });
@@ -54,7 +54,7 @@ export default function AdminNoticePage() {
     // Delete image: remove from Firestore and call backend to delete from ImageKit
     const deleteNotice = async (docId, fileId) => {
         try {
-            await deleteDoc(doc(firestore, "NoticeboradImages", docId));
+            await deleteDoc(doc(firestore, "noticeboradImages", docId));
             await fetch("http://localhost:4000/deleteImage", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -87,7 +87,7 @@ export default function AdminNoticePage() {
             return;
         }
         try {
-            const docRef = await addDoc(collection(firestore, "NoticeboradImages"), {
+            const docRef = await addDoc(collection(firestore, "noticeboradImages"), {
                 imageLink: imageUploadedData.url,
                 fileId: imageUploadedData.fileId,
             });

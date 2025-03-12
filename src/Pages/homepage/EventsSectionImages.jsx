@@ -25,11 +25,11 @@ export default function NoticeBoard() {
     const [pinColors, setPinColors] = useState([]);
     const [selectedImage, setSelectedImage] = useState(null);
 
-    // Fetch notice images from Firestore's "NoticeboradImages" collection
+    // Fetch notice images from Firestore's "noticeboradImages" collection
     useEffect(() => {
         async function fetchNotices() {
             try {
-                const querySnapshot = await getDocs(collection(firestore, "NoticeboradImages"));
+                const querySnapshot = await getDocs(collection(firestore, "noticeboradImages"));
                 const imgs = [];
                 querySnapshot.forEach((docSnap) => {
                     imgs.push({ id: docSnap.id, ...docSnap.data() });

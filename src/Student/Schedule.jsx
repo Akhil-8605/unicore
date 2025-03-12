@@ -14,7 +14,7 @@ function Schedules() {
     // Sample timetable data with multiple images per department
     const departments = {
         CO2I: [
-            { id: 1, title: "Monday-Wednesday Schedule", src: "/placeholder.svg?height=400&width=600" },
+            { id: 1, title: "Monday-Wednesday Schedule", src: "https://ik.imagekit.io/akhil8605unicore/co-even-time-table_page-0001.jpg?updatedAt=1741793469572" },
             { id: 2, title: "Thursday-Friday Schedule", src: "/placeholder.svg?height=400&width=600" },
             { id: 3, title: "Weekend Classes", src: "/placeholder.svg?height=400&width=600" },
         ],

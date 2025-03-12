@@ -16,7 +16,7 @@ const ImageGallery = () => {
     useEffect(() => {
         async function fetchImages() {
             try {
-                const querySnapshot = await getDocs(collection(firestore, "GalleryImages"));
+                const querySnapshot = await getDocs(collection(firestore, "galleryImages"));
                 const fetchedImages = querySnapshot.docs
                     .map(doc => ({
                         id: doc.id,

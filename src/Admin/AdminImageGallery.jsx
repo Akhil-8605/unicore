@@ -45,7 +45,7 @@ export default function GalleryAdminPage() {
   useEffect(() => {
     async function fetchImages() {
       try {
-        const querySnapshot = await getDocs(collection(firestore, "GalleryImages"));
+        const querySnapshot = await getDocs(collection(firestore, "galleryImages"));
         const images = [];
         querySnapshot.forEach((docSnap) => {
           images.push({ id: docSnap.id, ...docSnap.data() });
@@ -61,7 +61,7 @@ export default function GalleryAdminPage() {
   // Delete image: remove from Firestore and call backend to delete from ImageKit
   const deleteImage = async (docId, fileId) => {
     try {
-      await deleteDoc(doc(firestore, "GalleryImages", docId));
+      await deleteDoc(doc(firestore, "galleryImages", docId));
     } catch (error) {
       console.error("Error deleting from Firestore", error);
       alert("Error deleting image from database");
@@ -112,7 +112,7 @@ export default function GalleryAdminPage() {
     }
 
     try {
-      const docRef = doc(firestore, "GalleryImages", editingImage.id);
+      const docRef = doc(firestore, "galleryImages", editingImage.id);
       await updateDoc(docRef, updatedFields);
     } catch (error) {
       console.error("Error updating Firestore record", error);
@@ -148,7 +148,7 @@ export default function GalleryAdminPage() {
     }
     const title = e.target.title.value;
     try {
-      const docRef = await addDoc(collection(firestore, "GalleryImages"), {
+      const docRef = await addDoc(collection(firestore, "galleryImages"), {
         imageLink: imageUploadedData.url,
         title: title,
         fileId: imageUploadedData.fileId,
