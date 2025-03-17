@@ -28,7 +28,6 @@ const quickLinks = [
         description: 'Access digital library and research materials',
         link: '/library'
     },
-
     {
         title: 'Academic Calendar',
         icon: Calendar,
