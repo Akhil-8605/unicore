@@ -47,7 +47,7 @@ export default function StudentPortalLayout({ children }) {
         <div className="portal-sidebar-sidebar-header">
           <div className="portal-sidebar-logo-container">
             {/* <Home className="portal-sidebar-logo-icon" />*/}
-            <a className="portal-sidebar-logo-text" href="/" style={{textDecoration: 'none',cursor: 'pointer'}}>UniCore</a>
+            <a className="portal-sidebar-logo-text" href="/" style={{textDecoration: 'none',cursor: 'pointer'}}>SPM</a>
             {/* <img src={unicoreLogo} alt="" className="portal-sidebar-logo-img" /> */}
           </div>
           <button

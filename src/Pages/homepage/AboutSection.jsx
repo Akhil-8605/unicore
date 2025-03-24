@@ -8,7 +8,7 @@ const AboutSection = () => {
         <div className="about-history">
           {/* <h2 className="about-title">Our Legacy of Excellence</h2> */}
           <p className="about-text">
-            uniCore is celebrating 27 years of its glory in the field of technical education. 
+            SPM is celebrating 27 years of its glory in the field of technical education. 
             On this occasion, let's ignite the memories of this journey of our institute. The visionary man 
             Hon. Late Brahmadevdada Mane always thought about the bright future of youth residing in the 
             rural area and knew very well that students of rural area do not have technical education 
@@ -16,7 +16,7 @@ const AboutSection = () => {
             institute to provide a technical education.
           </p>
           <p className="about-text">
-            In year 1998, the first brick of uniCore was laid, marking the beginning of a 
+            In year 1998, the first brick of SPM was laid, marking the beginning of a 
             transformative journey in technical education. Today, the institute has been successfully giving 
             direction to thousands of students under the dynamic leadership of Hon. President Mr. Diliprao Mane.
           </p>

@@ -86,14 +86,14 @@ export default function Hero() {
         <div className="hero-section-text-content fade-in">
           <h1 className="hero-section-title">
             Welcome to
-            <span className="hero-section-gradient-text"> UniCore</span>
+            <span className="hero-section-gradient-text"> SPM</span>
           </h1>
           <p className="hero-section-subtitle">
-            The Next Generation University Management System
+          SPM polytechnic kumthe Since 1998
           </p>
 
           <div className="hero-section-cta-container">
-            <Link to={`${user.role === "admin" ? '/admin' :'/student-portal'}`}>
+            <Link to={`${user ? (user.role === "admin" ? '/admin' :'/student-portal') : ''}`}>
               <button className="hero-section-primary-button">
                 Get Started
                 <svg className="hero-section-arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

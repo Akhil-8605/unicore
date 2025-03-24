@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Header.css'; // Import the CSS file
 import logo from '../Images/unicore logo.png';
-import logoWhite from '../Images/unicore logo white.png';
+import logoWhite from '../Images/spm favico.png';
 import { Link } from 'react-router-dom';
 
 const Header = ({ setWhenAppears, setWhenDisappears }) => {

@@ -6,7 +6,7 @@ const VideoTour = () => {
     return (
         <section className="video-section">
             <div className="video-container">
-                <h2 className="video-title"><SlidingSection text={"Enjoy Our Digital Tour @Unicore"}/></h2>
+                <h2 className="video-title"><SlidingSection text={"Enjoy Our Digital Tour @SPM"}/></h2>
                 <div className="video-wrapper">
                     <iframe
                         src="https://www.youtube.com/embed/RbvLCB9eGgI?si=iVUTzoOvTWUns3fp"

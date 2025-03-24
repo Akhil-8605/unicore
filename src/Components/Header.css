@@ -58,7 +58,9 @@
 }
 
 .logo img {
-  width: 180px;
+  /* width: 180px;  for unicore while logo */
+  /* width: 150px; for spm white logo */
+  width: 75px; /* for spm favico */
   transition: all 0.3s ease;
 }
 

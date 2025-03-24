@@ -16,7 +16,7 @@ const AboutUs = () => {
           className="hero-image-about-us"
         />
         <div className="hero-content-about-us">
-          <h1 className="hero-title-about-us">About UniCore</h1>
+          <h1 className="hero-title-about-us">About SPM</h1>
           <p className="hero-subtitle-about-us">Excellence in Technical Education Since 1998</p>
         </div>
       </div>
@@ -28,7 +28,7 @@ const AboutUs = () => {
             <h2 className="section-title-about-us">Our Legacy</h2>
             <div className="history-text-about-us">
               <p>
-                Unicore was established in the year 1998 by a dynamic, visionary personality Hon'ble Late
+                SPM was established in the year 1998 by a dynamic, visionary personality Hon'ble Late
                 Brahmadevdada Mane with his strong will, commitment and determination. The motto of foundation was to
                 nurture and grow young talent residing in rural area and desiring to pursue a technical education after
                 SSC.
@@ -221,7 +221,7 @@ const AboutUs = () => {
       {/* Key Features */}
       <section className="features-section-about-us">
         <div className="container-about-us">
-          <h2 className="section-title-about-us about-us-centered">Why Choose Unicore</h2>
+          <h2 className="section-title-about-us about-us-centered">Why Choose SPM</h2>
           <div className="features-grid-about-us">
             <div className="feature-card-about-us">
               <div className="feature-icon-about-us">
@@ -285,7 +285,7 @@ const AboutUs = () => {
       <section className="cta-section-about-us container-about-us">
         <h2 className="section-title-about-us about-us-centered">Join Our Institution</h2>
         <p className="cta-text-about-us">
-          Be part of our legacy of excellence and embark on a journey towards a successful technical career with Unicore.
+          Be part of our legacy of excellence and embark on a journey towards a successful technical career with SPM.
         </p>
         <div className="cta-buttons-about-us">
           <a href="/admissions" className="primary-button-about-us">Apply Now</a>
