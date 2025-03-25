@@ -211,17 +211,18 @@ const EventsAdmin = () => {
         // Pre-fill subject & body
         setNotificationFormData({
             subject: `New Event: ${event.title}`,
-            body: `Hello ,
+            body: `Hello Students,
 We have an exciting update regarding a new event!
 
 Title: ${event.title}
+Description : ${event.description}
 Category: ${event.category}
 Date: ${event.date}
 Time: ${event.time}
 Location: ${event.location || "N/A"}
 
 For more details and updates, please visit:
-https://unicore-8605.web.app#events
+https://spmorg.vercel.app#events
 
 Thank you!`,
         });

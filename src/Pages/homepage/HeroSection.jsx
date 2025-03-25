@@ -93,7 +93,7 @@ export default function Hero() {
           </p>
 
           <div className="hero-section-cta-container">
-            <Link to={`${user ? (user.role === "admin" ? '/admin' :'/student-portal') : ''}`}>
+            <Link to={`${user ? (user.role === "admin" ? '/admin' :'/student-portal') : '/student-portal'}`}>
               <button className="hero-section-primary-button">
                 Get Started
                 <svg className="hero-section-arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
