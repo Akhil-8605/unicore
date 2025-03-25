@@ -1,149 +1,292 @@
-.student-schedule-schedules-container {
+/* Layout */
+.app-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  padding: 24px;
+}
+
+/* Schedules Container */
+.schedules-container {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  border: 1px solid #e1e7ef;
+}
+
+/* Header */
+.schedules-header {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  background-color: #f5f7fa;
+  gap: 16px;
+  padding: 24px;
+  border-bottom: 1px solid #e1e7ef;
 }
 
-.student-schedule-schedules-main {
-  flex: 1;
-  padding: 2rem;
-}
-
-.student-schedule-schedules-content {
-  /* max-width: 1200px; */
-  /* margin: 0 auto; */
-  background-color: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  padding: 2rem;
-}
-
-.student-schedule-schedules-header {
+.header-title {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.5rem;
-  border-bottom: 1px solid #eaeaea;
-  padding-bottom: 1rem;
+  gap: 12px;
 }
 
-.student-schedule-schedules-header h1 {
-  font-size: 1.75rem;
-  font-weight: 600;
-  color: #333;
-  margin: 0;
-}
-
-.student-schedule-department-select {
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  background-color: white;
-  min-width: 120px;
-  height: 42px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-.student-schedule-department-select:hover {
-  border-color: #aaa;
-}
-
-.student-schedule-department-select:focus {
-  outline: none;
-  border-color: #4a90e2;
-  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
-}
-
-.student-schedule-schedules-description {
-  margin-bottom: 1.5rem;
-  color: #666;
-}
-
-.student-schedule-schedules-gallery {
-  width: 100%;
-  overflow: hidden;
-  padding: 1rem 0;
-}
-
-.student-schedule-schedules-scroll {
+.icon-container {
   display: flex;
-  overflow-x: auto;
-  gap: 1.5rem;
-  padding: 0.5rem 0.25rem;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: thin;
-  scrollbar-color: #ddd transparent;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: #4361ee;
+  border-radius: 50%;
+  color: white;
 }
 
-.student-schedule-schedules-scroll::-webkit-scrollbar {
-  height: 6px;
+.schedules-header h1 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1a2b4b;
 }
 
-.student-schedule-schedules-scroll::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 10px;
+.department-selector {
+  width: 100%;
 }
 
-.student-schedule-schedules-scroll::-webkit-scrollbar-thumb {
-  background: #ddd;
-  border-radius: 10px;
+.department-select {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 16px;
+  border: 1px solid #d1d9e6;
+  border-radius: 8px;
+  background-color: #fff;
+  color: #1a2b4b;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%231a2b4b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 20px;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-.student-schedule-schedules-scroll::-webkit-scrollbar-thumb:hover {
-  background: #ccc;
+.department-select:focus {
+  outline: none;
+  border-color: #4361ee;
+  box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
 }
 
-.student-schedule-schedule-card {
-  flex: 0 0 auto;
-  width: 300px;
-  border-radius: 10px;
+/* Content */
+.schedules-content {
+  padding: 24px;
+}
+
+.schedules-description {
+  margin-bottom: 24px;
+}
+
+.schedules-description h2 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1a2b4b;
+  margin-bottom: 8px;
+}
+
+.schedules-description p {
+  color: #5a6a85;
+  font-size: 16px;
+}
+
+/* Gallery */
+.schedule-gallery-container {
+  position: relative;
+  padding: 0 40px;
+}
+
+.schedules-gallery {
   overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 0 -8px;
+}
+
+.schedules-scroll {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  overflow-x: scroll;
+  padding: 8px 0;
+  scrollbar-width: none;
+  scrollbar-color: #cbd5e1 transparent;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 16px;
+}
+
+/* Schedule Cards */
+.schedule-card {
+  flex: 0 0 auto;
+  width: 280px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
-  background-color: white;
+  background-color: #fff;
+  border: 1px solid #e1e7ef;
 }
 
-.student-schedule-schedule-card:hover {
+.schedule-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
 }
 
-.student-schedule-schedule-card img {
-  width: 100%;
+.card-image-container {
+  position: relative;
   height: 180px;
+  overflow: hidden;
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  border-bottom: 1px solid #eaeaea;
+  transition: transform 0.5s ease;
 }
 
-.student-schedule-schedule-title {
-  padding: 1rem;
+.schedule-card:hover .card-image {
+  transform: scale(1.05);
+}
+
+.card-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+}
+
+.schedule-card:hover .card-overlay {
+  background-color: rgba(0, 0, 0, 0.4);
+  opacity: 1;
+}
+
+.card-overlay span {
+  color: white;
   font-weight: 500;
-  color: #333;
-  text-align: center;
+  padding: 8px 16px;
+  border-radius: 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  transform: translateY(10px);
+  transition: transform 0.3s ease;
 }
 
-.student-schedule-modal-overlay {
-  position: fixed;
-  top: 0;
+.schedule-card:hover .card-overlay span {
+  transform: translateY(0);
+}
+
+.card-content {
+  padding: 16px;
+}
+
+.card-content h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a2b4b;
+  margin-bottom: 4px;
+}
+
+.card-content p {
+  font-size: 14px;
+  color: #5a6a85;
+}
+
+/* Navigation Buttons */
+.gallery-nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #fff;
+  border: 1px solid #e1e7ef;
+  color: #1a2b4b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  z-index: 10;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.gallery-nav-button:hover {
+  background-color: #f8f9fa;
+  transform: translateY(-50%) scale(1.05);
+}
+
+.gallery-nav-button:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.prev-button {
   left: 0;
+}
+
+.next-button {
   right: 0;
-  bottom: 0;
+}
+
+/* Loading State */
+.loading-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  width: 100%;
+  gap: 12px;
+}
+
+.loading-spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid #e1e7ef;
+  border-top-color: #4361ee;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
   background-color: rgba(0, 0, 0, 0.75);
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   z-index: 1000;
-  padding: 1rem;
+  padding: 16px;
   backdrop-filter: blur(4px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-.student-schedule-modal-content {
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content {
   background-color: white;
   border-radius: 12px;
   width: 90%;
@@ -152,56 +295,88 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
   animation: modalFadeIn 0.3s ease;
 }
 
-.student-schedule-modal-header {
+.modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 1.5rem;
-  border-bottom: 1px solid #eaeaea;
+  padding: 16px 24px;
+  border-bottom: 1px solid #e1e7ef;
 }
 
-.student-schedule-modal-header h2 {
+.modal-header h2 {
   margin: 0;
-  font-size: 1.25rem;
+  font-size: 20px;
   font-weight: 600;
-  color: #333;
+  color: #1a2b4b;
 }
 
-.student-schedule-modal-close {
+.modal-close {
   background: none;
   border: none;
   cursor: pointer;
-  color: #666;
+  color: #5a6a85;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.5rem;
+  padding: 8px;
   border-radius: 50%;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.student-schedule-modal-close:hover {
-  background-color: #f5f5f5;
-  color: #333;
+.modal-close:hover {
+  background-color: #f1f5f9;
+  color: #1a2b4b;
 }
 
-.student-schedule-modal-body {
-  padding: 1.5rem;
+.modal-body {
+  padding: 24px;
   overflow-y: auto;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex: 1;
 }
 
-.student-schedule-modal-image {
+.modal-image {
   max-width: 100%;
   max-height: 70vh;
   object-fit: contain;
   border-radius: 4px;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  border-top: 1px solid #e1e7ef;
+}
+
+.modal-footer p {
+  color: #5a6a85;
+  font-size: 14px;
+}
+
+.download-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background-color: #4361ee;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.download-button:hover {
+  background-color: #3a56d4;
 }
 
 @keyframes modalFadeIn {
@@ -215,44 +390,143 @@
   }
 }
 
-@media (max-width: 768px) {
-  .student-schedule-modal-content {
-    width: 95%;
+/* Responsive Design */
+@media (min-width: 768px) {
+  .sidebar {
+    display: block;
   }
 
-  .student-schedule-modal-header {
-    padding: 0.75rem 1rem;
+  .schedules-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
   }
 
-  .student-schedule-modal-header h2 {
-    font-size: 1.1rem;
-  }
-
-  .student-schedule-modal-body {
-    padding: 1rem;
+  .department-selector {
+    width: auto;
+    min-width: 200px;
   }
 }
 
 @media (max-width: 768px) {
-  .student-schedule-schedules-main {
-    padding: 1rem;
+  .main-content {
+    padding: 16px;
   }
 
-  .student-schedule-schedules-content {
-    padding: 1.5rem;
+  .schedules-header {
+    padding: 16px;
   }
 
-  .student-schedule-schedules-header {
+  .schedules-content {
+    padding: 16px;
+  }
+
+  .gallery-container {
+    padding: 0 32px;
+  }
+
+  .schedule-card {
+    width: 240px;
+  }
+
+  .card-image-container {
+    height: 160px;
+  }
+
+  .modal-header {
+    padding: 12px 16px;
+  }
+
+  .modal-body {
+    padding: 16px;
+  }
+
+  .modal-footer {
+    padding: 12px 16px;
     flex-direction: column;
     align-items: flex-start;
-    gap: 1rem;
+    gap: 12px;
   }
 
-  .student-schedule-department-select {
+  .download-button {
     width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .schedule-card {
+    width: 220px;
   }
 
-  .student-schedule-schedule-card {
-    width: 250px;
+  .card-image-container {
+    height: 140px;
+  }
+
+  .gallery-nav-button {
+    width: 32px;
+    height: 32px;
+  }
+
+  .gallery-container {
+    padding: 0 24px;
+  }
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom scrollbar styling */
+.scrollbar-thin::-webkit-scrollbar {
+  height: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 10px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Animation utilities */
+.animate-in {
+  animation-duration: 300ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+.fade-in {
+  animation-name: fadeIn;
+}
+
+.zoom-in-95 {
+  animation-name: zoomIn95;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes zoomIn95 {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }
