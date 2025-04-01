@@ -221,7 +221,7 @@ const departments = [
                         classAverage: 26.3,
                         highestMarks: 28,
                         date: "2024-08-28",
-                        pdfUrl: "/pdfs/electronics/sem3/ct1/electronic-devices-and-circuits.pdf",
+                        pdfUrl: "https://docs.google.com/spreadsheets/d/1VXcJVHmfNDdP5bzs4bekaTE5PRWCe1P1/edit?usp=drive_link&ouid=102384131522933535464&rtpof=true&sd=true",
                         teacher: "Ms. Shaikh",
                         teacherFeedback: {
                             suggestions: [
@@ -237,7 +237,7 @@ const departments = [
                         classAverage: 26.3,
                         highestMarks: 29,
                         date: "2024-08-28",
-                        pdfUrl: "/pdfs/electronics/sem3/ct1/electronic-devices-and-circuits.pdf",
+                        pdfUrl: "https://docs.google.com/spreadsheets/d/1VXcJVHmfNDdP5bzs4bekaTE5PRWCe1P1/edit?usp=drive_link&ouid=102384131522933535464&rtpof=true&sd=true",
                         teacher: "Mr. Gade",
                         teacherFeedback: {
                             suggestions: [
@@ -253,7 +253,7 @@ const departments = [
                         classAverage: 27.5,
                         highestMarks: 29,
                         date: "2024-08-29",
-                        pdfUrl: "/pdfselectronics/sem3/ct1/digital-electronics.pdf",
+                        pdfUrl: "https://docs.google.com/spreadsheets/d/1VXcJVHmfNDdP5bzs4bekaTE5PRWCe1P1/edit?usp=drive_link&ouid=102384131522933535464&rtpof=true&sd=true",
                         teacher: "Ms. Rajmane",
                         teacherFeedback: {
                             suggestions: [
@@ -269,7 +269,7 @@ const departments = [
                         classAverage: 27.3,
                         highestMarks: 29,
                         date: "2024-08-29",
-                        pdfUrl: "/pdfs/electronics/sem3/ct1/digital-electronics.pdf",
+                        pdfUrl: "https://docs.google.com/spreadsheets/d/1VXcJVHmfNDdP5bzs4bekaTE5PRWCe1P1/edit?usp=drive_link&ouid=102384131522933535464&rtpof=true&sd=true",
                         teacher: "Mr. Rashinkar",
                         teacherFeedback: {
                             suggestions: [
@@ -287,7 +287,7 @@ const departments = [
                         classAverage: 26.3,
                         highestMarks: 30,
                         date: "2024-11-12",
-                        pdfUrl: "/pdfs/electronics/sem3/ct1/electronic-devices-and-circuits.pdf",
+                        pdfUrl: "https://docs.google.com/spreadsheets/d/1VXcJVHmfNDdP5bzs4bekaTE5PRWCe1P1/edit?usp=drive_link&ouid=102384131522933535464&rtpof=true&sd=true",
                         teacher: "Ms. Shaikh",
                         teacherFeedback: {
                             suggestions: [
@@ -303,7 +303,7 @@ const departments = [
                         classAverage: 26.3,
                         highestMarks: 28,
                         date: "2024-11-12",
-                        pdfUrl: "/pdfs/electronics/sem3/ct1/electronic-devices-and-circuits.pdf",
+                        pdfUrl: "https://docs.google.com/spreadsheets/d/1VXcJVHmfNDdP5bzs4bekaTE5PRWCe1P1/edit?usp=drive_link&ouid=102384131522933535464&rtpof=true&sd=true",
                         teacher: "Mr. Gade",
                         teacherFeedback: {
                             suggestions: [
@@ -319,7 +319,7 @@ const departments = [
                         classAverage: 26.5,
                         highestMarks: 30,
                         date: "2024-11-13",
-                        pdfUrl: "/pdfs/electronics/sem3/ct1/digital-electronics.pdf",
+                        pdfUrl: "https://docs.google.com/spreadsheets/d/1VXcJVHmfNDdP5bzs4bekaTE5PRWCe1P1/edit?usp=drive_link&ouid=102384131522933535464&rtpof=true&sd=true",
                         teacher: "Ms. Rajmane",
                         teacherFeedback: {
                             suggestions: [
@@ -335,7 +335,7 @@ const departments = [
                         classAverage: 27.3,
                         highestMarks: 28,
                         date: "2024-11-13",
-                        pdfUrl: "/pdfs/electronics/sem3/ct1/digital-electronics.pdf",
+                        pdfUrl: "https://docs.google.com/spreadsheets/d/1VXcJVHmfNDdP5bzs4bekaTE5PRWCe1P1/edit?usp=drive_link&ouid=102384131522933535464&rtpof=true&sd=true",
                         teacher: "Mr. Rashinkar",
                         teacherFeedback: {
                             suggestions: [
@@ -489,7 +489,7 @@ const departments = [
                         classAverage: 17.5,
                         highestMarks: 19,
                         date: "2024-08-28",
-                        pdfUrl: "/pdfs/electronics/sem5/ct1/basic-electronics.pdf",
+                        pdfUrl: "https://docs.google.com/spreadsheets/d/1RSVgx0DwquKJN4zeSsrBmjTSb9b-pQU4/edit?usp=drive_link&ouid=102384131522933535464&rtpof=true&sd=true",
                         teacher: "Ms. Asade",
                         teacherFeedback: {
                             suggestions: [
@@ -505,7 +505,7 @@ const departments = [
                         classAverage: 17.0,
                         highestMarks: 20,
                         date: "2024-08-28",
-                        pdfUrl: "/pdfs/electronics/sem5/ct1/basic-electronics.pdf",
+                        pdfUrl: "https://docs.google.com/spreadsheets/d/1RSVgx0DwquKJN4zeSsrBmjTSb9b-pQU4/edit?usp=drive_link&ouid=102384131522933535464&rtpof=true&sd=true",
                         teacher: "Mr. Gavasane",
                         teacherFeedback: {
                             suggestions: [
@@ -521,7 +521,7 @@ const departments = [
                         classAverage: 18.0,
                         highestMarks: 19,
                         date: "2024-08-29",
-                        pdfUrl: "/pdfs/electronics/sem5/ct1/basic-electronics.pdf",
+                        pdfUrl: "https://docs.google.com/spreadsheets/d/1RSVgx0DwquKJN4zeSsrBmjTSb9b-pQU4/edit?usp=drive_link&ouid=102384131522933535464&rtpof=true&sd=true",
                         teacher: "Ms. Nadaf",
                         teacherFeedback: {
                             suggestions: [
@@ -537,7 +537,7 @@ const departments = [
                         classAverage: 17.5,
                         highestMarks: 19,
                         date: "2024-08-29",
-                        pdfUrl: "/pdfs/electronics/sem5/ct1/basic-electronics.pdf",
+                        pdfUrl: "https://docs.google.com/spreadsheets/d/1RSVgx0DwquKJN4zeSsrBmjTSb9b-pQU4/edit?usp=drive_link&ouid=102384131522933535464&rtpof=true&sd=true",
                         teacher: "Ms. Birajdar",
                         teacherFeedback: {
                             suggestions: [
@@ -553,7 +553,7 @@ const departments = [
                         classAverage: 16.0,
                         highestMarks: 20,
                         date: "2024-08-30",
-                        pdfUrl: "/pdfs/electronics/sem5/ct1/basic-electronics.pdf",
+                        pdfUrl: "https://docs.google.com/spreadsheets/d/1RSVgx0DwquKJN4zeSsrBmjTSb9b-pQU4/edit?usp=drive_link&ouid=102384131522933535464&rtpof=true&sd=true",
                         teacher: "Ms. Mhetre",
                         teacherFeedback: {
                             suggestions: [
@@ -571,7 +571,7 @@ const departments = [
                         classAverage: 18.5,
                         highestMarks: 20,
                         date: "2024-11-12",
-                        pdfUrl: "/pdfs/electronics/sem5/ct1/basic-electronics.pdf",
+                        pdfUrl: "https://docs.google.com/spreadsheets/d/1RSVgx0DwquKJN4zeSsrBmjTSb9b-pQU4/edit?usp=drive_link&ouid=102384131522933535464&rtpof=true&sd=true",
                         teacher: "Ms. Asade",
                         teacherFeedback: {
                             suggestions: [
@@ -587,7 +587,7 @@ const departments = [
                         classAverage: 15.5,
                         highestMarks: 19,
                         date: "2024-11-12",
-                        pdfUrl: "/pdfs/electronics/sem5/ct1/basic-electronics.pdf",
+                        pdfUrl: "https://docs.google.com/spreadsheets/d/1RSVgx0DwquKJN4zeSsrBmjTSb9b-pQU4/edit?usp=drive_link&ouid=102384131522933535464&rtpof=true&sd=true",
                         teacher: "Mr. Gavasane",
                         teacherFeedback: {
                             suggestions: [
@@ -603,7 +603,7 @@ const departments = [
                         classAverage: 17.5,
                         highestMarks: 19,
                         date: "2024-11-13",
-                        pdfUrl: "/pdfs/electronics/sem5/ct1/basic-electronics.pdf",
+                        pdfUrl: "https://docs.google.com/spreadsheets/d/1RSVgx0DwquKJN4zeSsrBmjTSb9b-pQU4/edit?usp=drive_link&ouid=102384131522933535464&rtpof=true&sd=true",
                         teacher: "Ms. Nadaf",
                         teacherFeedback: {
                             suggestions: [
@@ -619,7 +619,7 @@ const departments = [
                         classAverage: 16.0,
                         highestMarks: 19,
                         date: "2024-11-13",
-                        pdfUrl: "/pdfs/electronics/sem5/ct1/basic-electronics.pdf",
+                        pdfUrl: "https://docs.google.com/spreadsheets/d/1RSVgx0DwquKJN4zeSsrBmjTSb9b-pQU4/edit?usp=drive_link&ouid=102384131522933535464&rtpof=true&sd=true",
                         teacher: "Ms. Birajdar",
                         teacherFeedback: {
                             suggestions: [
@@ -635,7 +635,7 @@ const departments = [
                         classAverage: 17.5,
                         highestMarks: 19,
                         date: "2024-11-14",
-                        pdfUrl: "/pdfs/electronics/sem5/ct1/basic-electronics.pdf",
+                        pdfUrl: "https://docs.google.com/spreadsheets/d/1RSVgx0DwquKJN4zeSsrBmjTSb9b-pQU4/edit?usp=drive_link&ouid=102384131522933535464&rtpof=true&sd=true",
                         teacher: "Ms. Mhetre",
                         teacherFeedback: {
                             suggestions: [
@@ -648,7 +648,7 @@ const departments = [
                 ]
             },
             "sem6":{
-                ct1:[
+                ct1:[   
                     {
                         subject: "Emerging Trends in IT",
                         subjectCode: "22618",
@@ -2549,7 +2549,7 @@ export default function ClassTestResults() {
     const [selectedSemester, setSelectedSemester] = useState('');
     const [selectedTest, setSelectedTest] = useState('ct1');
     const [searchQuery, setSearchQuery] = useState('');
-    const [showFilters, setShowFilters] = useState(false);
+    const [showFilters, setShowFilters] = useState(true);
 
     const semesters = ['sem1', 'sem2', 'sem3', 'sem4', 'sem5', 'sem6'];
 
@@ -2589,9 +2589,11 @@ export default function ClassTestResults() {
             {/* Header */}
             <header className="results-page-page-header">
                 <div className="results-page-header-content">
-                    <Link to="/academics" className="results-page-back-button">
+                    <button onClick={()=>{
+                        window.history.back();
+                    }} className="results-page-back-button">
                         <ArrowLeft className="results-page-button-icon" />
-                    </Link>
+                    </button>
                     <h1>Class Test Results</h1>
                 </div>
             </header>
