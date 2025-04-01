@@ -106,7 +106,7 @@ export default function AdminLibrary() {
               <h1 className="library-page-text-[#007bff]">
                 Library Management - Admin Panel
               </h1>
-              <p>Manage and organize the university library collection</p>
+              <p>Manage and organize the Institute library collection</p>
             </div>
             <button
               className="library-page-btn-primary"

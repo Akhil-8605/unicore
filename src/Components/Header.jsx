@@ -53,7 +53,7 @@ const Header = ({ setWhenAppears, setWhenDisappears }) => {
             <div className="header-section-navbar-container">
                 {/* Logo Section */}
                 <div className="logo">
-                    <img src={`${isScrolled ? logo : logoWhite}`} alt="University Logo" />
+                    <img src={`${isScrolled ? logo : logoWhite}`} alt="Institute Logo" />
                 </div>
 
                 {/* Navigation Items */}

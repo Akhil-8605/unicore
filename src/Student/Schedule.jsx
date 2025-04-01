@@ -6,7 +6,7 @@ import StudentPortalLayout from "./StudentPortalLayout"
 import loader from "../Images/loading.gif"
 import { useAuth } from '../Authentication/AuthProvider'; // Assuming you have a useAuth hook
 
-import { collection, getDocs, query, where, updateDoc, doc } from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../Authentication/firebase";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -16,7 +16,6 @@ export default function Schedules() {
     const navigate = useNavigate();
     const [userProfile, setUserProfile] = useState(null);
     const [selectedDepartment, setSelectedDepartment] = useState("CO")
-
 
     // Fetch profile data from Firestore.
     useEffect(() => {
@@ -40,7 +39,7 @@ export default function Schedules() {
                     if (data.branch === "Electronics & Telecommunication") {
                         setSelectedDepartment("EJ");
                     }
-                    
+
                     if (data.branch === "Mechanical Engineering") {
                         setSelectedDepartment("MECH");
                     }
@@ -50,18 +49,15 @@ export default function Schedules() {
                 }
             } catch (error) {
                 console.error("Error fetching user profile:", error);
-            } finally {
             }
         };
 
         fetchUserProfile();
     }, [user, navigate]);
 
-
     const [showModal, setShowModal] = useState(false)
     const [selectedImage, setSelectedImage] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
-
 
     const departments = {
         CO: [
@@ -115,7 +111,7 @@ export default function Schedules() {
 
     // Scroll the gallery left
     const scrollLeft = () => {
-        const gallery = document.querySelector(".schedules-scroll")
+        const gallery = document.querySelector(".student-schedule-schedules-scroll")
         if (gallery) {
             gallery.scrollBy({ left: -300, behavior: "smooth" })
         }
@@ -123,7 +119,7 @@ export default function Schedules() {
 
     // Scroll the gallery right
     const scrollRight = () => {
-        const gallery = document.querySelector(".schedules-scroll")
+        const gallery = document.querySelector(".student-schedule-schedules-scroll")
         if (gallery) {
             gallery.scrollBy({ left: 300, behavior: "smooth" })
         }
@@ -142,13 +138,13 @@ export default function Schedules() {
     }, [showModal])
 
     return (
-        <div className="app-container">
+        <div className="student-schedule-app-container">
             <StudentPortalLayout />
-            <main className="main-content">
-                <div className="schedules-container">
-                    <div className="schedules-header">
-                        <div className="header-title">
-                            <div className="icon-container">
+            <main className="student-schedule-main-content">
+                <div className="student-schedule-schedules-container">
+                    <div className="student-schedule-schedules-header">
+                        <div className="student-schedule-header-title">
+                            <div className="student-schedule-icon-container">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                     <rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect>
                                     <line x1="16" x2="16" y1="2" y2="6"></line>
@@ -159,11 +155,11 @@ export default function Schedules() {
                             <h1>Class Schedules</h1>
                         </div>
 
-                        <div className="department-selector">
+                        <div className="student-schedule-department-selector">
                             <select
                                 value={selectedDepartment}
                                 onChange={handleDepartmentChange}
-                                className="department-select"
+                                className="student-schedule-department-select"
                             >
                                 <option value="CO">Computer Engineering</option>
                                 <option value="EJ">Electronic & Telecommunication</option>
@@ -172,40 +168,40 @@ export default function Schedules() {
                         </div>
                     </div>
 
-                    <div className="schedules-content">
-                        <div className="schedules-description">
+                    <div className="student-schedule-schedules-content">
+                        <div className="student-schedule-schedules-description">
                             <h2>{selectedDepartment} Department Schedules</h2>
                             <p>
                                 View and download the class schedules for {selectedDepartment === 'CO' ? 'Computer Engineering' : selectedDepartment === 'EJ' ? 'Electronics & Telecommunication' : 'Mechanical Engineering'}. Click on any schedule to view in full screen.
                             </p>
                         </div>
 
-                        <div className="schedule-gallery-container">
-                            <div className="schedules-gallery">
+                        <div className="student-schedule-schedule-gallery-container">
+                            <div className="student-schedule-schedules-gallery">
                                 {isLoading ? (
-                                    <div className="loading-container">
+                                    <div className="student-schedule-loading-container">
                                         <img src={loader} alt="" />
                                         <span>Loading schedules...</span>
                                     </div>
                                 ) : (
-                                    <div className="schedules-scroll">
+                                    <div className="student-schedule-schedules-scroll">
                                         {departments[selectedDepartment]?.map((image) => (
                                             <div
                                                 key={image.id}
-                                                className="schedule-card"
+                                                className="student-schedule-schedule-card"
                                                 onClick={() => openModal(image)}
                                             >
-                                                <div className="card-image-container">
+                                                <div className="student-schedule-card-image-container">
                                                     <img
                                                         src={image.src || "/placeholder.svg"}
                                                         alt={`${selectedDepartment} - ${image.title}`}
-                                                        className="card-image"
+                                                        className="student-schedule-card-image"
                                                     />
-                                                    <div className="card-overlay">
+                                                    <div className="student-schedule-card-overlay">
                                                         <span>View Schedule</span>
                                                     </div>
                                                 </div>
-                                                <div className="card-content">
+                                                <div className="student-schedule-card-content">
                                                     <h3>{image.title}</h3>
                                                     <p>{selectedDepartment === 'CO' ? 'Computer Engineering' : selectedDepartment === 'EJ' ? 'Electronics & Telecommunication' : 'Mechanical Engineering'}</p>
                                                 </div>
@@ -222,16 +218,16 @@ export default function Schedules() {
             {/* Modal Component */}
             {showModal && selectedImage && (
                 <div
-                    className={`modal-overlay ${showModal ? 'active' : ''}`}
+                    className={`student-schedule-modal-overlay ${showModal ? 'active' : ''}`}
                     onClick={closeModal}
                 >
                     <div
-                        className="modal-content"
+                        className="student-schedule-modal-content"
                         onClick={(e) => e.stopPropagation()}
                     >
-                        <div className="modal-header">
+                        <div className="student-schedule-modal-header">
                             <h2>{selectedImage.title}</h2>
-                            <button className="modal-close" onClick={closeModal} aria-label="Close modal">
+                            <button className="student-schedule-modal-close" onClick={closeModal} aria-label="Close modal">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                     <path d="M18 6 6 18"></path>
                                     <path d="m6 6 12 12"></path>
@@ -239,17 +235,17 @@ export default function Schedules() {
                             </button>
                         </div>
 
-                        <div className="modal-body">
+                        <div className="student-schedule-modal-body">
                             <img
                                 src={selectedImage.src || "/placeholder.svg"}
                                 alt={`${selectedDepartment} - ${selectedImage.title}`}
-                                className="modal-image"
+                                className="student-schedule-modal-image"
                             />
                         </div>
 
-                        <div className="modal-footer">
+                        <div className="student-schedule-modal-footer">
                             <p>Department: {selectedDepartment}</p>
-                            <button className="download-button">
+                            <button className="student-schedule-download-button">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                                     <polyline points="7 10 12 15 17 10"></polyline>

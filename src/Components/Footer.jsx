@@ -1,6 +1,6 @@
 import React from 'react';
 import './Footer.css';
-import logoWhite from '../Images/unicore logo white.png'
+import logoWhite from '../Images/spm white logo.png'
 
 function Footer() {
     return (
@@ -58,8 +58,8 @@ function Footer() {
                             <h3>About UniCore</h3>
                             <ul>
                                 <li><a href="/about" className="footer-section-hover-effect">About Us</a></li>
-                                <li><a href="/#partners" className="footer-section-hover-effect">Our Partners</a></li>
                                 <li><a href="/contact-us" className="footer-section-hover-effect">Contact Us</a></li>
+                                <li><a href="/#partners" className="footer-section-hover-effect">Our Recruiters</a></li>
                             </ul>
                         </div>
                     </div>

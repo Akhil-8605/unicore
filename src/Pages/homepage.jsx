@@ -33,13 +33,13 @@ const Homepage = () => { // Ensure the component starts with an uppercase letter
       <HiUser />
       <ImageGallery />
       <AboutSection />
+      <LoginNow />
       <QuickAccess />
       <UpcomingEventsSection />
       <EventsSectionImages />
       <CoursesSection />
       <OurRecruiters />
       <VideoTour />
-      <LoginNow />
       <Footer />
     </>
   );

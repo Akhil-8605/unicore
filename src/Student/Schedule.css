@@ -1,16 +1,16 @@
 /* Layout */
-.app-container {
+.student-schedule-app-container {
   display: flex;
   min-height: 100vh;
 }
 
-.main-content {
+.student-schedule-main-content {
   flex: 1;
   padding: 24px;
 }
 
 /* Schedules Container */
-.schedules-container {
+.student-schedule-schedules-container {
   background-color: #fff;
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
@@ -19,7 +19,7 @@
 }
 
 /* Header */
-.schedules-header {
+.student-schedule-schedules-header {
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -27,13 +27,13 @@
   border-bottom: 1px solid #e1e7ef;
 }
 
-.header-title {
+.student-schedule-header-title {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
-.icon-container {
+.student-schedule-icon-container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -44,17 +44,17 @@
   color: white;
 }
 
-.schedules-header h1 {
+.student-schedule-schedules-header h1 {
   font-size: 24px;
   font-weight: 700;
   color: #1a2b4b;
 }
 
-.department-selector {
+.student-schedule-department-selector {
   width: 100%;
 }
 
-.department-select {
+.student-schedule-department-select {
   width: 100%;
   padding: 12px 16px;
   font-size: 16px;
@@ -71,45 +71,45 @@
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-.department-select:focus {
+.student-schedule-department-select:focus {
   outline: none;
   border-color: #4361ee;
   box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
 }
 
 /* Content */
-.schedules-content {
+.student-schedule-schedules-content {
   padding: 24px;
 }
 
-.schedules-description {
+.student-schedule-schedules-description {
   margin-bottom: 24px;
 }
 
-.schedules-description h2 {
+.student-schedule-schedules-description h2 {
   font-size: 20px;
   font-weight: 600;
   color: #1a2b4b;
   margin-bottom: 8px;
 }
 
-.schedules-description p {
+.student-schedule-schedules-description p {
   color: #5a6a85;
   font-size: 16px;
 }
 
 /* Gallery */
-.schedule-gallery-container {
+.student-schedule-schedule-gallery-container {
   position: relative;
   padding: 0 40px;
 }
 
-.schedules-gallery {
+.student-schedule-schedules-gallery {
   overflow: hidden;
   margin: 0 -8px;
 }
 
-.schedules-scroll {
+.student-schedule-schedules-scroll {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
@@ -122,7 +122,7 @@
 }
 
 /* Schedule Cards */
-.schedule-card {
+.student-schedule-schedule-card {
   flex: 0 0 auto;
   width: 280px;
   border-radius: 12px;
@@ -134,29 +134,29 @@
   border: 1px solid #e1e7ef;
 }
 
-.schedule-card:hover {
+.student-schedule-schedule-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
 }
 
-.card-image-container {
+.student-schedule-card-image-container {
   position: relative;
   height: 180px;
   overflow: hidden;
 }
 
-.card-image {
+.student-schedule-card-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.5s ease;
 }
 
-.schedule-card:hover .card-image {
+.student-schedule-schedule-card:hover .student-schedule-card-image {
   transform: scale(1.05);
 }
 
-.card-overlay {
+.student-schedule-card-overlay {
   position: absolute;
   inset: 0;
   background-color: rgba(0, 0, 0, 0);
@@ -167,12 +167,12 @@
   transition: background-color 0.3s ease, opacity 0.3s ease;
 }
 
-.schedule-card:hover .card-overlay {
+.student-schedule-schedule-card:hover .student-schedule-card-overlay {
   background-color: rgba(0, 0, 0, 0.4);
   opacity: 1;
 }
 
-.card-overlay span {
+.student-schedule-card-overlay span {
   color: white;
   font-weight: 500;
   padding: 8px 16px;
@@ -183,28 +183,28 @@
   transition: transform 0.3s ease;
 }
 
-.schedule-card:hover .card-overlay span {
+.student-schedule-schedule-card:hover .student-schedule-card-overlay span {
   transform: translateY(0);
 }
 
-.card-content {
+.student-schedule-card-content {
   padding: 16px;
 }
 
-.card-content h3 {
+.student-schedule-card-content h3 {
   font-size: 16px;
   font-weight: 600;
   color: #1a2b4b;
   margin-bottom: 4px;
 }
 
-.card-content p {
+.student-schedule-card-content p {
   font-size: 14px;
   color: #5a6a85;
 }
 
 /* Navigation Buttons */
-.gallery-nav-button {
+.student-schedule-gallery-nav-button {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -223,25 +223,25 @@
   transition: background-color 0.2s, transform 0.2s;
 }
 
-.gallery-nav-button:hover {
+.student-schedule-gallery-nav-button:hover {
   background-color: #f8f9fa;
   transform: translateY(-50%) scale(1.05);
 }
 
-.gallery-nav-button:active {
+.student-schedule-gallery-nav-button:active {
   transform: translateY(-50%) scale(0.95);
 }
 
-.prev-button {
+.student-schedule-prev-button {
   left: 0;
 }
 
-.next-button {
+.student-schedule-next-button {
   right: 0;
 }
 
 /* Loading State */
-.loading-container {
+.student-schedule-loading-container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -250,7 +250,7 @@
   gap: 12px;
 }
 
-.loading-spinner {
+.student-schedule-loading-spinner {
   width: 24px;
   height: 24px;
   border: 3px solid #e1e7ef;
@@ -266,7 +266,7 @@
 }
 
 /* Modal */
-.modal-overlay {
+.student-schedule-modal-overlay {
   position: fixed;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.75);
@@ -281,12 +281,12 @@
   transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-.modal-overlay.active {
+.student-schedule-modal-overlay.active {
   opacity: 1;
   visibility: visible;
 }
 
-.modal-content {
+.student-schedule-modal-content {
   background-color: white;
   border-radius: 12px;
   width: 90%;
@@ -299,7 +299,7 @@
   animation: modalFadeIn 0.3s ease;
 }
 
-.modal-header {
+.student-schedule-modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -307,14 +307,14 @@
   border-bottom: 1px solid #e1e7ef;
 }
 
-.modal-header h2 {
+.student-schedule-modal-header h2 {
   margin: 0;
   font-size: 20px;
   font-weight: 600;
   color: #1a2b4b;
 }
 
-.modal-close {
+.student-schedule-modal-close {
   background: none;
   border: none;
   cursor: pointer;
@@ -327,12 +327,12 @@
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.modal-close:hover {
+.student-schedule-modal-close:hover {
   background-color: #f1f5f9;
   color: #1a2b4b;
 }
 
-.modal-body {
+.student-schedule-modal-body {
   padding: 24px;
   overflow-y: auto;
   display: flex;
@@ -341,14 +341,14 @@
   flex: 1;
 }
 
-.modal-image {
+.student-schedule-modal-image {
   max-width: 100%;
   max-height: 70vh;
   object-fit: contain;
   border-radius: 4px;
 }
 
-.modal-footer {
+.student-schedule-modal-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -356,12 +356,12 @@
   border-top: 1px solid #e1e7ef;
 }
 
-.modal-footer p {
+.student-schedule-modal-footer p {
   color: #5a6a85;
   font-size: 14px;
 }
 
-.download-button {
+.student-schedule-download-button {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -375,7 +375,7 @@
   transition: background-color 0.2s;
 }
 
-.download-button:hover {
+.student-schedule-download-button:hover {
   background-color: #3a56d4;
 }
 
@@ -392,122 +392,118 @@
 
 /* Responsive Design */
 @media (min-width: 768px) {
-  .sidebar {
+  .student-schedule-sidebar {
     display: block;
   }
 
-  .schedules-header {
+  .student-schedule-schedules-header {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
   }
 
-  .department-selector {
+  .student-schedule-department-selector {
     width: auto;
     min-width: 200px;
   }
 }
 
 @media (max-width: 768px) {
-  .main-content {
+  .student-schedule-main-content {
     padding: 16px;
   }
 
-  .schedules-header {
+  .student-schedule-schedules-header {
     padding: 16px;
   }
 
-  .schedules-content {
+  .student-schedule-schedules-content {
     padding: 16px;
   }
 
-  .gallery-container {
+  .student-schedule-schedule-gallery-container {
     padding: 0 32px;
   }
 
-  .schedule-card {
+  .student-schedule-schedule-card {
     width: 240px;
   }
 
-  .card-image-container {
+  .student-schedule-card-image-container {
     height: 160px;
   }
 
-  .modal-header {
+  .student-schedule-modal-header {
     padding: 12px 16px;
   }
 
-  .modal-body {
+  .student-schedule-modal-body {
     padding: 16px;
   }
 
-  .modal-footer {
+  .student-schedule-modal-footer {
     padding: 12px 16px;
     flex-direction: column;
     align-items: flex-start;
     gap: 12px;
   }
 
-  .download-button {
+  .student-schedule-download-button {
     width: 100%;
     justify-content: center;
   }
 }
 
 @media (max-width: 480px) {
-  .schedule-card {
+  .student-schedule-schedule-card {
     width: 220px;
   }
 
-  .card-image-container {
+  .student-schedule-card-image-container {
     height: 140px;
   }
 
-  .gallery-nav-button {
+  .student-schedule-gallery-nav-button {
     width: 32px;
     height: 32px;
   }
 
-  .gallery-container {
+  .student-schedule-schedule-gallery-container {
     padding: 0 24px;
   }
 }
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 /* Custom scrollbar styling */
-.scrollbar-thin::-webkit-scrollbar {
+.student-schedule-scrollbar-thin::-webkit-scrollbar {
   height: 6px;
 }
 
-.scrollbar-thin::-webkit-scrollbar-track {
+.student-schedule-scrollbar-thin::-webkit-scrollbar-track {
   background: transparent;
   border-radius: 10px;
 }
 
-.scrollbar-thin::-webkit-scrollbar-thumb {
+.student-schedule-scrollbar-thin::-webkit-scrollbar-thumb {
   background: #cbd5e1;
   border-radius: 10px;
 }
 
-.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+.student-schedule-scrollbar-thin::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
 }
 
 /* Animation utilities */
-.animate-in {
+.student-schedule-animate-in {
   animation-duration: 300ms;
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, opacity;
 }
 
-.fade-in {
+.student-schedule-fade-in {
   animation-name: fadeIn;
 }
 
-.zoom-in-95 {
+.student-schedule-zoom-in-95 {
   animation-name: zoomIn95;
 }
 

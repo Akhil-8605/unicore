@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Header.css'; // Import the CSS file
-import logo from '../Images/unicore logo.png';
+import logo from '../Images/spm logo.png';
 import logoWhite from '../Images/unicore logo white.png';
 import { Link } from 'react-router-dom';
 
@@ -31,7 +31,7 @@ const Header = ({ setWhenAppears, setWhenDisappears }) => {
             <div className="header-section-navbar-container">
                 {/* Logo Section */}
                 <div className="logo">
-                    <img src={`${true ? logo : logoWhite}`} alt="University Logo" />
+                    <img src={`${true ? logo : logoWhite}`} alt="Institute Logo" />
                 </div>
 
                 {/* Navigation Items */}

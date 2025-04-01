@@ -28,11 +28,11 @@ function EmailPortal() {
                     <section className="email-services-welcome-section">
                         <div className="email-services-welcome-content">
                             <h2>
-                                Welcome to Your <span className="email-services-highlight">University Email Services</span>
+                                Welcome to Your <span className="email-services-highlight">Institute Email Services</span>
                             </h2>
                             <p className="email-services-welcome-text">
                                 Your centralized hub for all academic communications. Stay connected with professors, classmates, and
-                                important university announcements through our secure platform.
+                                important Institute announcements through our secure platform.
                             </p>
                             <div className="email-services-welcome-badges">
                                 <span className="email-services-badge">
@@ -58,7 +58,7 @@ function EmailPortal() {
                         <div className="email-services-email-card">
                             <div className="email-services-email-card-content">
                                 <div className="email-services-email-card-text">
-                                    <h3>Access Your University Emails</h3>
+                                    <h3>Access Your Institute Emails</h3>
                                     <p>
                                         Click the button below to instantly view all communications from UniCore in your inbox. Stay updated
                                         with the latest announcements, course materials, and important notifications.
@@ -78,7 +78,7 @@ function EmailPortal() {
                                 <div className="email-services-email-action">
                                     <button className="email-services-email-button" onClick={handleViewEmails}>
                                         <Mail className="email-services-button-icon" />
-                                        <span>View University Emails</span>
+                                        <span>View Institute Emails</span>
                                         <ExternalLink className="email-services-external-icon" />
                                     </button>
                                 </div>

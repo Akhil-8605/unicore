@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Plus, Search, Pencil, Trash2 } from "lucide-react";
+import { Plus, Search, Pencil, Trash2, Bell } from "lucide-react";
 import {
   collection,
   addDoc,
@@ -7,6 +7,7 @@ import {
   deleteDoc,
   doc,
   onSnapshot,
+  getDocs,
 } from "firebase/firestore";
 import { db } from "../Authentication/firebase";
 
@@ -40,6 +41,13 @@ const AdminAcademicCalendar = () => {
 
   // For delete confirmation
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+
+  // For notification modal
+  const [isNotificationModalOpen, setIsNotificationModalOpen] = useState(false);
+  const [notificationFormData, setNotificationFormData] = useState({
+    subject: "",
+    body: "",
+  });
 
   // ----------------------------------------------------------
   // Fetch events in real-time from Firestore
@@ -144,6 +152,77 @@ const AdminAcademicCalendar = () => {
   };
 
   // ----------------------------------------------------------
+  // Notification modal logic
+  // ----------------------------------------------------------
+  const openNotificationModal = (event) => {
+    setSelectedEvent(event);
+    setNotificationFormData({
+      subject: `New Academic Calendar Event: ${event.title}`,
+      body: `Hello Students,
+We have an exciting update regarding a new academic calendar event!
+
+Title: ${event.title}
+Description: ${event.description}
+Type: ${event.type}
+Date: ${event.date}
+End Date: ${event.endDate || "N/A"}
+
+For more details and updates, please visit:
+https://spmorg.vercel.app/academic-calendar
+
+Thank you!`,
+    });
+    setIsNotificationModalOpen(true);
+  };
+
+  const closeNotificationModal = () => {
+    setIsNotificationModalOpen(false);
+    setSelectedEvent(null);
+    setNotificationFormData({
+      subject: "",
+      body: "",
+    });
+  };
+
+  const handleNotificationChange = (e) => {
+    const { name, value } = e.target;
+    setNotificationFormData({ ...notificationFormData, [name]: value });
+  };
+
+  const sendNotification = async () => {
+    try {
+      // 1. Fetch all user emails from Firestore
+      const usersSnapshot = await getDocs(collection(db, "users"));
+      const userEmails = usersSnapshot.docs
+        .map((doc) => doc.data().email)
+        .filter(Boolean);
+
+      if (!userEmails.length) {
+        toast.info("No user emails found in the database.");
+        return;
+      }
+
+      // 2. Build a mailto link with BCC
+      const subjectEncoded = encodeURIComponent(notificationFormData.subject);
+      const bodyEncoded = encodeURIComponent(notificationFormData.body);
+      const bccList = userEmails.join(";");
+
+      const mailtoLink = `mailto:?bcc=${bccList}&subject=${subjectEncoded}&body=${bodyEncoded}`;
+
+      // 3. Open the user’s default mail client
+      window.location.href = mailtoLink;
+
+      // 4. Show a toast notification
+      toast.success("Mail client opened. Please send the email from your mail client.");
+
+      closeNotificationModal();
+    } catch (error) {
+      console.error("Error preparing mailto link:", error);
+      toast.error("Failed to open mail client.");
+    }
+  };
+
+  // ----------------------------------------------------------
   // JSX
   // ----------------------------------------------------------
   return (
@@ -234,8 +313,8 @@ const AdminAcademicCalendar = () => {
                     <td>{event.type}</td>
                     <td>{event.date}</td>
                     <td>{event.endDate || "-"}</td>
-                    <td style={{width: "325px"}}>{event.description}</td>
-                    <td >
+                    <td style={{ width: "325px" }}>{event.description}</td>
+                    <td>
                       <button
                         className="admin-events-icon-button"
                         onClick={() => openForm(event)}
@@ -250,6 +329,12 @@ const AdminAcademicCalendar = () => {
                         }}
                       >
                         <Trash2 className="admin-events-button-icon" />
+                      </button>
+                      <button
+                        className="admin-events-icon-button"
+                        onClick={() => openNotificationModal(event)}
+                      >
+                        <Bell className="admin-events-button-icon" />
                       </button>
                     </td>
                   </tr>
@@ -360,6 +445,51 @@ const AdminAcademicCalendar = () => {
                   onClick={handleDelete}
                 >
                   Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ------------------------------------------------------
+            Notification Modal
+        ------------------------------------------------------ */}
+        {isNotificationModalOpen && (
+          <div className="admin-events-modal-overlay">
+            <div className="admin-events-modal">
+              <h2>Send Notification</h2>
+              <div className="admin-events-form-group">
+                <label>Subject</label>
+                <input
+                  type="text"
+                  name="subject"
+                  value={notificationFormData.subject}
+                  onChange={handleNotificationChange}
+                />
+              </div>
+              <div className="admin-events-form-group">
+                <label>Message</label>
+                <textarea
+                  rows={10}
+                  name="body"
+                  value={notificationFormData.body}
+                  onChange={handleNotificationChange}
+                />
+              </div>
+              <div className="admin-events-modal-actions">
+                <button
+                  type="button"
+                  className="admin-events-cancel-button"
+                  onClick={closeNotificationModal}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  className="admin-events-submit-button"
+                  onClick={sendNotification}
+                >
+                  Send
                 </button>
               </div>
             </div>

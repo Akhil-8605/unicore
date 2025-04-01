@@ -42,13 +42,14 @@
 
 .footer-section-logo-container {
   width: 12rem;
-  height: 5rem;
+  height: 3.5rem;
   position: relative;
 }
 
 .footer-section-logo-container img{
-  width: 100%;
+  width: 75%;
   height: 100%;
+  margin-left: -25%;
   user-select: none;
 }
 
@@ -436,6 +437,9 @@
 @media (max-width: 768px) {
   .footer-section-members-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .footer-section-logo-container img{
+    margin-left: 0;
   }
 }
 

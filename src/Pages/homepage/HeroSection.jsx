@@ -89,11 +89,11 @@ export default function Hero() {
             <span className="hero-section-gradient-text"> SPM</span>
           </h1>
           <p className="hero-section-subtitle">
-          SPM polytechnic kumthe Since 1998
+            SPM polytechnic kumthe Since 1998
           </p>
 
           <div className="hero-section-cta-container">
-            <Link to={`${user ? (user.role === "admin" ? '/admin' :'/student-portal') : '/student-portal'}`}>
+            <Link to={`${user ? (user.role === "admin" ? '/admin' : '/student-portal') : '/student-portal'}`}>
               <button className="hero-section-primary-button">
                 Get Started
                 <svg className="hero-section-arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -111,7 +111,7 @@ export default function Hero() {
               <path d="M6 12v5c3 3 9 3 12 0v-5" />
             </svg>
             <h3>Smart Learning</h3>
-            <p>AI-Powered Education</p>
+            <p>Smart Resources for Smarter Learning</p>
           </a>
 
           <a href='/email-services' style={{ textDecoration: "none" }} className="hero-section-floating-card hero-section-card2">
@@ -121,8 +121,8 @@ export default function Hero() {
               <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
               <path d="M16 3.13a4 4 0 0 1 0 7.75" />
             </svg>
-            <h3>Community</h3>
-            <p>Connected Campus</p>
+            <h3>Email Services</h3>
+            <p>Secure & Reliable Communication</p>
           </a>
 
           <a href='/student-portal/schedule' style={{ textDecoration: "none" }} className="hero-section-floating-card card3">
@@ -133,7 +133,7 @@ export default function Hero() {
               <line x1="3" y1="10" x2="21" y2="10" />
             </svg>
             <h3>Schedule</h3>
-            <p>Smart Timetabling</p>
+            <p>Efficient Timetable Management</p>
           </a>
         </div>
       </div>

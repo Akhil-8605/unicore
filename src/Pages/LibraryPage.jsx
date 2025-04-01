@@ -83,7 +83,7 @@ const StudentLibrary = () => {
                 <div className="library-page-library-container">
                     <div className="library-page-library-header">
                         <div className="library-page-header-content">
-                            <h1 className="library-page-text-[#007bff]">University Library</h1>
+                            <h1 className="library-page-text-[#007bff]">Institute Library</h1>
                             <p>Search and request books from our collection</p>
                         </div>
                     </div>
