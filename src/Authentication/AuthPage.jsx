@@ -1,52 +1,46 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "./AuthProvider";
-import { auth, provider, signInWithPopup } from "./firebase";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import { db } from "./firebase";
-import {
-  collection,
-  addDoc,
-  getDocs,
-  query,
-  where,
-  updateDoc,
-  doc
-} from "firebase/firestore";
-import "./AuthPage.css";
-import GoogleLogo from "../Images/google logo.png";
-import Logo from "../Images/loading.gif";
+"use client"
+
+import { useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { useAuth } from "./AuthProvider"
+import { auth, provider, signInWithPopup } from "./firebase"
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth"
+import { db } from "./firebase"
+import { collection, addDoc, getDocs, query, where, updateDoc, doc } from "firebase/firestore"
+import "./AuthPage.css"
+import googleLogo from "../Images/google logo.png"
+import Logo from "../Images/loading.gif"
 
 const AuthPage = () => {
-  const [isLogin, setIsLogin] = useState(true);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const { login } = useAuth();
-  const navigate = useNavigate();
+  const [isLogin, setIsLogin] = useState(true)
+  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
+  const { login } = useAuth()
+  const navigate = useNavigate()
 
   // State for current user uid
-  const [currentUserUid, setCurrentUserUid] = useState(null);
+  const [currentUserUid, setCurrentUserUid] = useState(null)
 
   // Modal for error messages
-  const [showModal, setShowModal] = useState(false);
-  const [modalMessage, setModalMessage] = useState("");
+  const [showModal, setShowModal] = useState(false)
+  const [modalMessage, setModalMessage] = useState("")
 
   // Branch selection modal state (for students only)
-  const [showBranchModal, setShowBranchModal] = useState(false);
-  const [selectedBranch, setSelectedBranch] = useState("");
-  const [profileDocId, setProfileDocId] = useState("");
+  const [showBranchModal, setShowBranchModal] = useState(false)
+  const [selectedBranch, setSelectedBranch] = useState("")
+  const [profileDocId, setProfileDocId] = useState("")
 
   // Loader state
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false)
 
   // Assign role based on email (default is "student")
   const assignRoleBasedOnEmail = (user) => {
-    let role = "student";
+    let role = "student"
     if (user.email === "admin@gmail.com") {
-      role = "admin";
+      role = "admin"
     }
-    return role;
-  };
+    return role
+  }
 
   // Create basic user document in "users" collection including branch
   const createUserDoc = async (user, role, branch = "none") => {
@@ -56,13 +50,13 @@ const AuthPage = () => {
       displayName: user.displayName || "",
       role: role,
       branch: branch,
-    };
-    await addDoc(collection(db, "users"), userData);
-  };
+    }
+    await addDoc(collection(db, "users"), userData)
+  }
 
   // Create detailed user profile document in "usersProfile" collection (only for students) including branch
   const createUserProfileDoc = async (user, role, branch = "none") => {
-    if (role === "admin") return null; // Do not create profile for admins
+    if (role === "admin") return null // Do not create profile for admins
     const userProfileData = {
       uid: user.uid,
       email: user.email,
@@ -76,7 +70,7 @@ const AuthPage = () => {
       stats: {
         enorollment: "none",
         certificates: "none",
-        attendance: "none"
+        attendance: "none",
       },
       academicInfo: {
         major: "none",
@@ -95,170 +89,170 @@ const AuthPage = () => {
         emergency: {
           name: "none",
           relation: "none",
-          phone: "none"
-        }
-      }
-    };
-    const docRef = await addDoc(collection(db, "usersProfile"), userProfileData);
-    return docRef.id;
-  };
+          phone: "none",
+        },
+      },
+    }
+    const docRef = await addDoc(collection(db, "usersProfile"), userProfileData)
+    return docRef.id
+  }
 
   // Create documents in both collections if they do not already exist.
   // For admins, only the "users" document is created.
   const createUserDocuments = async (user, role) => {
     // Check and create in "users" collection
-    const usersQuery = query(collection(db, "users"), where("uid", "==", user.uid));
-    const usersSnapshot = await getDocs(usersQuery);
+    const usersQuery = query(collection(db, "users"), where("uid", "==", user.uid))
+    const usersSnapshot = await getDocs(usersQuery)
     if (usersSnapshot.empty) {
-      await createUserDoc(user, role);
+      await createUserDoc(user, role)
     }
-    if (role === "admin") return null;
+    if (role === "admin") return null
     // For students: check and create in "usersProfile" collection
-    const profileQuery = query(collection(db, "usersProfile"), where("uid", "==", user.uid));
-    const profileSnapshot = await getDocs(profileQuery);
-    let profileId = "";
+    const profileQuery = query(collection(db, "usersProfile"), where("uid", "==", user.uid))
+    const profileSnapshot = await getDocs(profileQuery)
+    let profileId = ""
     if (profileSnapshot.empty) {
-      profileId = await createUserProfileDoc(user, role);
+      profileId = await createUserProfileDoc(user, role)
     } else {
-      profileId = profileSnapshot.docs[0].id;
+      profileId = profileSnapshot.docs[0].id
     }
-    return profileId;
-  };
+    return profileId
+  }
 
   // Update branch in the "users" collection document
   const updateUserBranchInUsers = async (uid, branch) => {
-    const usersQuery = query(collection(db, "users"), where("uid", "==", uid));
-    const usersSnapshot = await getDocs(usersQuery);
+    const usersQuery = query(collection(db, "users"), where("uid", "==", uid))
+    const usersSnapshot = await getDocs(usersQuery)
     if (!usersSnapshot.empty) {
-      const userDocId = usersSnapshot.docs[0].id;
-      await updateDoc(doc(db, "users", userDocId), { branch: branch });
+      const userDocId = usersSnapshot.docs[0].id
+      await updateDoc(doc(db, "users", userDocId), { branch: branch })
     }
-  };
+  }
 
   // After authentication, if the user is a student, check if branch is set.
   // For admins, skip branch selection.
   const checkBranchAndNavigate = async (uid, role) => {
     if (role === "admin") {
-      navigate("/");
-      return;
+      navigate("/")
+      return
     }
-    const profileQuery = query(collection(db, "usersProfile"), where("uid", "==", uid));
-    const profileSnapshot = await getDocs(profileQuery);
+    const profileQuery = query(collection(db, "usersProfile"), where("uid", "==", uid))
+    const profileSnapshot = await getDocs(profileQuery)
     if (!profileSnapshot.empty) {
-      const profileData = profileSnapshot.docs[0].data();
+      const profileData = profileSnapshot.docs[0].data()
       if (!profileData.branch || profileData.branch === "" || profileData.branch === "none") {
-        setProfileDocId(profileSnapshot.docs[0].id);
-        setShowBranchModal(true);
-        return;
+        setProfileDocId(profileSnapshot.docs[0].id)
+        setShowBranchModal(true)
+        return
       }
     }
-    navigate("/");
-  };
+    navigate("/")
+  }
 
   // Handle email/password authentication (login or sign-up)
   const handleAuth = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     try {
-      setLoading(true);
+      setLoading(true)
       if (isLogin) {
         // Log in existing user
-        const userCredential = await signInWithEmailAndPassword(auth, username, password);
-        const user = userCredential.user;
-        const role = assignRoleBasedOnEmail(user);
-        setCurrentUserUid(user.uid);
-        login({ email: user.email, uid: user.uid, displayName: user.displayName, role });
-        await checkBranchAndNavigate(user.uid, role);
+        const userCredential = await signInWithEmailAndPassword(auth, username, password)
+        const user = userCredential.user
+        const role = assignRoleBasedOnEmail(user)
+        setCurrentUserUid(user.uid)
+        login({ email: user.email, uid: user.uid, displayName: user.displayName, role })
+        await checkBranchAndNavigate(user.uid, role)
       } else {
         // Sign up new user
-        const userCredential = await createUserWithEmailAndPassword(auth, username, password);
-        const user = userCredential.user;
-        const role = assignRoleBasedOnEmail(user);
-        setCurrentUserUid(user.uid);
-        await createUserDocuments(user, role);
-        login({ email: user.email, uid: user.uid, displayName: user.displayName, role });
-        await checkBranchAndNavigate(user.uid, role);
+        const userCredential = await createUserWithEmailAndPassword(auth, username, password)
+        const user = userCredential.user
+        const role = assignRoleBasedOnEmail(user)
+        setCurrentUserUid(user.uid)
+        await createUserDocuments(user, role)
+        login({ email: user.email, uid: user.uid, displayName: user.displayName, role })
+        await checkBranchAndNavigate(user.uid, role)
       }
     } catch (error) {
-      setModalMessage(error.message);
-      setShowModal(true);
+      setModalMessage(error.message)
+      setShowModal(true)
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  };
+  }
 
   // Handle Google sign-in
   const handleGoogleLogin = async () => {
     try {
-      setLoading(true);
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
+      setLoading(true)
+      const result = await signInWithPopup(auth, provider)
+      const user = result.user
       const role =
         user.email === "akhileshadam186@gmail.com" ||
-        user.email === "sanjukanki@gmail.com" ||
-        user.email === "unicore.akhil@gmail.com"
+          user.email === "sanjukanki@gmail.com" ||
+          user.email === "unicore.akhil@gmail.com"
           ? "admin"
-          : "student";
-      setCurrentUserUid(user.uid);
-      await createUserDocuments(user, role);
-      login({ email: user.email, uid: user.uid, displayName: user.displayName, role });
+          : "student"
+      setCurrentUserUid(user.uid)
+      await createUserDocuments(user, role)
+      login({ email: user.email, uid: user.uid, displayName: user.displayName, role })
       if (role === "admin") {
-        navigate("/");
+        navigate("/")
       } else {
-        const profileQuery = query(collection(db, "usersProfile"), where("uid", "==", user.uid));
-        const profileSnapshot = await getDocs(profileQuery);
+        const profileQuery = query(collection(db, "usersProfile"), where("uid", "==", user.uid))
+        const profileSnapshot = await getDocs(profileQuery)
         if (!profileSnapshot.empty) {
-          const profileData = profileSnapshot.docs[0].data();
+          const profileData = profileSnapshot.docs[0].data()
           if (!profileData.branch || profileData.branch === "" || profileData.branch === "none") {
-            setProfileDocId(profileSnapshot.docs[0].id);
-            setShowBranchModal(true);
-            return;
+            setProfileDocId(profileSnapshot.docs[0].id)
+            setShowBranchModal(true)
+            return
           }
         }
-        navigate("/");
+        navigate("/")
       }
     } catch (error) {
-      setModalMessage("Google sign-in failed: " + error.message);
-      setShowModal(true);
+      setModalMessage("Google sign-in failed: " + error.message)
+      setShowModal(true)
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  };
+  }
 
   // Update branch in both the user's profile and users collection
   const handleBranchSelect = async () => {
-    if (!selectedBranch) return;
+    if (!selectedBranch) return
     try {
-      setLoading(true);
+      setLoading(true)
       // Update branch in usersProfile
       if (profileDocId) {
-        const profileDocRef = doc(db, "usersProfile", profileDocId);
-        await updateDoc(profileDocRef, { branch: selectedBranch });
+        const profileDocRef = doc(db, "usersProfile", profileDocId)
+        await updateDoc(profileDocRef, { branch: selectedBranch })
       }
       // Update branch in users collection
       if (currentUserUid) {
-        await updateUserBranchInUsers(currentUserUid, selectedBranch);
+        await updateUserBranchInUsers(currentUserUid, selectedBranch)
       }
-      setShowBranchModal(false);
-      navigate("/");
+      setShowBranchModal(false)
+      navigate("/")
     } catch (error) {
-      setModalMessage(error.message);
-      setShowModal(true);
+      setModalMessage(error.message)
+      setShowModal(true)
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  };
+  }
 
   const closeModal = () => {
-    setShowModal(false);
-    setModalMessage("");
-  };
+    setShowModal(false)
+    setModalMessage("")
+  }
 
   return (
     <div className={`auth-page ${isLogin ? "login-view" : "signup-view"}`}>
       {/* Loader Overlay */}
       {loading && (
         <div className="auth-page-overlay">
-          <img src={Logo} alt="Loading" />
+          <img src={Logo || "/placeholder.svg"} alt="Loading" />
         </div>
       )}
 
@@ -280,9 +274,7 @@ const AuthPage = () => {
             <select value={selectedBranch} onChange={(e) => setSelectedBranch(e.target.value)}>
               <option value="">-- Select Branch --</option>
               <option value="Computer Engineering">Computer Engineering</option>
-              <option value="Electronics & Telecommunication">
-                Electronics & Telecommunication
-              </option>
+              <option value="Electronics & Telecommunication">Electronics & Telecommunication</option>
               <option value="Mechanical Engineering">Mechanical Engineering</option>
             </select>
             <button onClick={handleBranchSelect}>Confirm</button>
@@ -305,9 +297,7 @@ const AuthPage = () => {
               <>
                 <p className="auth-page-quote-title">A WISE QUOTE</p>
                 <h1 className="auth-page-quote-text">A New Beginning</h1>
-                <p className="auth-page-quote-subtitle">
-                  Sign up now to start your academic journey with us.
-                </p>
+                <p className="auth-page-quote-subtitle">Sign up now to start your academic journey with us.</p>
               </>
             )}
           </div>
@@ -315,82 +305,46 @@ const AuthPage = () => {
 
         <div className={`auth-page-form-section ${isLogin ? "right" : "left"}`}>
           <div className="auth-page-form-content">
-            <h1 className="auth-page-form-title">
-              {isLogin ? "Welcome Back" : "Create an Account"}
-            </h1>
+            <h1 className="auth-page-form-title">{isLogin ? "Welcome Back" : "Create an Account"}</h1>
             <p className="auth-page-form-subtitle">
               {isLogin
-                ? "Enter your username and password to access your account"
+                ? "Sign in securely with your Google account to access your dashboard"
                 : "Sign up to start your journey with us"}
             </p>
             <form onSubmit={handleAuth}>
-              <div className="auth-page-input-group">
-                <label>Email</label>
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  required
-                />
-              </div>
-
-              <div className="auth-page-input-group">
-                <label>Password</label>
-                <div style={{ position: "relative" }}>
+              <div style={{ display: "none" }}>
+                <div className="auth-page-input-group">
+                  <label>Email</label>
                   <input
-                    type="password"
-                    placeholder="Enter your password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    type="email"
+                    placeholder="Enter your email"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
                     required
                   />
-                  <span
-                    className="toggle-password"
-                    title="Click to hide password"
-                    onClick={(e) => {
-                      const input = e.target.previousSibling;
-                      if (input.type === "password") {
-                        input.type = "text";
-                        e.target.innerText = "🙈";
-                      } else {
-                        input.type = "password";
-                        e.target.innerText = "👀";
-                      }
-                    }}
-                    style={{
-                      position: "absolute",
-                      top: "50%",
-                      right: "0px",
-                      transform: "translateY(-50%)",
-                      cursor: "pointer",
-                    }}
-                  >
-                    👀
-                  </span>
                 </div>
-              </div>
 
-              {!isLogin && (
                 <div className="auth-page-input-group">
-                  <label>Confirm Password</label>
+                  <label>Password</label>
                   <div style={{ position: "relative" }}>
                     <input
                       type="password"
-                      placeholder="Confirm your password"
+                      placeholder="Enter your password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
                       required
                     />
                     <span
                       className="toggle-password"
                       title="Click to hide password"
                       onClick={(e) => {
-                        const input = e.target.previousSibling;
+                        const input = e.target.previousSibling
                         if (input.type === "password") {
-                          input.type = "text";
-                          e.target.innerText = "🙈";
+                          input.type = "text"
+                          e.target.innerText = "🙈"
                         } else {
-                          input.type = "password";
-                          e.target.innerText = "👀";
+                          input.type = "password"
+                          e.target.innerText = "👀"
                         }
                       }}
                       style={{
@@ -405,39 +359,76 @@ const AuthPage = () => {
                     </span>
                   </div>
                 </div>
-              )}
 
-              <button type="submit" className="auth-page-primary-btn">
-                {isLogin ? "Log In" : "Sign Up"}
-              </button>
+                {!isLogin && (
+                  <div className="auth-page-input-group">
+                    <label>Confirm Password</label>
+                    <div style={{ position: "relative" }}>
+                      <input type="password" placeholder="Confirm your password" required />
+                      <span
+                        className="toggle-password"
+                        title="Click to hide password"
+                        onClick={(e) => {
+                          const input = e.target.previousSibling
+                          if (input.type === "password") {
+                            input.type = "text"
+                            e.target.innerText = "🙈"
+                          } else {
+                            input.type = "password"
+                            e.target.innerText = "👀"
+                          }
+                        }}
+                        style={{
+                          position: "absolute",
+                          top: "50%",
+                          right: "0px",
+                          transform: "translateY(-50%)",
+                          cursor: "pointer",
+                        }}
+                      >
+                        👀
+                      </span>
+                    </div>
+                  </div>
+                )}
 
-              <div className="auth-page-divider">OR</div>
+                <button type="submit" className="auth-page-primary-btn">
+                  {isLogin ? "Log In" : "Sign Up"}
+                </button>
+              </div>
 
-              <button
-                type="button"
-                className="auth-page-google-btn"
-                onClick={handleGoogleLogin}
-              >
-                {isLogin ? "Sign In with " : "Sign Up with "}
-                <img
-                  src={GoogleLogo}
-                  alt="Google"
-                  className="auth-page-google-icon"
-                />
-              </button>
+              <div className="auth-page-google-card-container">
+                <div className="auth-page-google-card" onClick={handleGoogleLogin}>
+                  <div className="auth-page-google-card-content">
+                    <div className="auth-page-google-logo">
+                      <div className="auth-page-google-icon-wrapper">
+                        <img className="auth-page-google-icon" src={googleLogo}></img>
+                      </div>
+                    </div>
+                    <span className="auth-page-google-text">
+                      {isLogin ? "Continue with Google" : "Sign up with Google"}
+                    </span>
+                  </div>
+                  <div className="auth-page-google-card-shine"></div>
+                  <div className="auth-page-google-card-particles">
+                    <div className="auth-page-google-card-particle"></div>
+                    <div className="auth-page-google-card-particle"></div>
+                    <div className="auth-page-google-card-particle"></div>
+                    <div className="auth-page-google-card-particle"></div>
+                  </div>
+                </div>
+              </div>
             </form>
 
             <p className="auth-page-switch-auth">
               {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
-              <span onClick={() => setIsLogin(!isLogin)}>
-                {isLogin ? "Sign Up" : "Log In"}
-              </span>
+              <span onClick={() => setIsLogin(!isLogin)}>{isLogin ? "Sign Up" : "Log In"}</span>
             </p>
           </div>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default AuthPage;
+export default AuthPage

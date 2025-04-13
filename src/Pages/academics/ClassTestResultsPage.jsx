@@ -2742,7 +2742,7 @@ export default function ClassTestResults() {
                                     </div>
                                 </div>
                             </div>
-                            <button
+                            {/* <button
                                 className="results-page-download-button"
                                 onClick={() =>
                                     openPdf(result.pdfUrl, `${result.subject} - ${selectedTest.toUpperCase()} Result`)
@@ -2750,7 +2750,7 @@ export default function ClassTestResults() {
                             >
                                 <Download className="results-page-button-icon" />
                                 Download Result
-                            </button>
+                            </button> */}
                         </div>
                     ))}
                 </div>

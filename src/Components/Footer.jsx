@@ -106,7 +106,7 @@ function Footer() {
                         </div>
 
                         <div className="footer-section-footer-info">
-                            <p>&copy; {new Date().getFullYear()} UniCore. All rights reserved.</p>
+                            <p>&copy; {new Date().getFullYear()} SPM by Akhil. All rights reserved.</p>
                         </div>
 
                         {console.log(window.scrollY)}
