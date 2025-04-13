@@ -313,7 +313,7 @@ export default function DashboardPage() {
             </div>
             <div className="actions-grid">
               {[
-                { name: "Schedule", href: "/student-portal/schedule", icon: Calendar, description: "Manage your academic schedule" },
+                { name: "Schedule", href: "/student-portal-schedule", icon: Calendar, description: "Manage your academic schedule" },
                 {
                   name: "Library Resources", href: "/student-portal/library", icon: Library, description: 'Access digital library and research materials',
                 },

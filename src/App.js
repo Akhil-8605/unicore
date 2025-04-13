@@ -124,7 +124,7 @@ function App() {
 
           <Route element={<PrivateRoute allowedRoles={["student"]} />}>
             <Route path="/student-portal" element={<Dashboard />} />
-            <Route path="/student-portal/schedule" element={<Schedules />} />
+            <Route path="/student-portal-schedule" element={<Schedules />} />
             <Route
               path="/student-portal/library"
               element={<StudentLibraryPage />}

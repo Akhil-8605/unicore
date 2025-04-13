@@ -29,7 +29,7 @@ export default function StudentPortalLayout({ children }) {
   const navigation = {
     main: [
       { name: "Dashboard", href: "/student-portal", icon: LayoutDashboard },
-      { name: "Schedule", href: "/student-portal/schedule", icon: Calendar },
+      { name: "Schedule", href: "/student-portal-schedule", icon: Calendar },
     ],
     academic: [
       { name: "Library", href: "/student-portal/library", icon: Library },

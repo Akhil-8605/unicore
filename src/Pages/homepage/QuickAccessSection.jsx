@@ -38,7 +38,7 @@ const quickLinks = [
         title: 'Class Schedule',
         icon: Clock,
         description: 'View and manage your daily class schedule',
-        link: '/student-portal/schedule'
+        link: '/student-portal-schedule'
     },
     {
         title: 'Email Services',
